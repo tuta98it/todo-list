@@ -2,35 +2,42 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-input-button-unit',
-  template: ` <p>input-button-unit works! The title is: {{ title }}</p>
-    <input type="text" [value]="generateTitle()" id="my-input" />
+  template: `
+    <p>input-button-unit works! The title is: {{ title }}</p>
+    <input
+      type="text"
+      [value]="title"
+      (keyup.enter)="changeTitle($event)"
+      id="my-input"
+    >
 
-
-
-
-    <button>Save</button>`,
+    <button (click)="changeTitle($event)">Save</button>
+    <!-- <button>Save</button> -->
+  `,
   styleUrls: ['./input-button-unit.component.scss'],
 })
 export class InputButtonUnitComponent implements OnInit {
-  title = 'Hello world@';
+  title = 'Start: Step 1: Nothing';
 
   constructor() {
-    // this.title = 'I Love Angular';
-    console.log('in constructor');
-    this.changeTitle('My First Angular App');
-    console.log(this.title);
-    // this.changeTitle('I Love Angular');
+    // // this.title = 'I Love Angular';
+    // console.log('in constructor');
+    // this.changeTitle('My First Angular App');
+    // console.log(this.title);
+    // // this.changeTitle('I Love Angular');
   }
 
   ngOnInit(): void {
-    setTimeout(() => {
-      this.title = 'This is not the title you are looking for';
-    }, 3000);
+    // setTimeout(() => {
+    //   this.title = 'This is not the title you are looking for';
+    // }, 3000);
   }
 
-  changeTitle(newTitle: string) {
-    console.log(newTitle);
-    this.title = newTitle;
+  changeTitle(e: Event): void {
+    // console.log(event);
+    const target = e.target as HTMLInputElement;
+
+    this.title = target.value; // the original functionality still works
   }
 
   generateTitle(): string {
@@ -44,7 +51,3 @@ function multiply(x: number, y: number) {
 
 let z = multiply(4, 5);
 console.log(z);
-
-
-
-
