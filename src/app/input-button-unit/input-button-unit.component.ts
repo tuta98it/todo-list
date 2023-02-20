@@ -3,7 +3,7 @@ import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 @Component({
   selector: 'app-input-button-unit',
   template: `
-    <p>input-button-unit works! The title is: {{ title }}</p>
+    <p>input-button-unit works!</p>
     <input
       #inputElementRef
       type="text"

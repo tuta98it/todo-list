@@ -5,7 +5,7 @@ import { TodoItem } from './interfaces/todo-item';
   selector: 'app-root',
   // templateUrl: './app.component.html',
   template: `
-    <h1 *ngIf="">Welcome to {{ title }}!</h1>
+    <!-- <h1 *ngIf="">Welcome to {{ title }}!</h1>
     <app-input-button-unit (submit)="addItem($event)"></app-input-button-unit>
     <app-input-button-unit (submit)="addItem($event)"></app-input-button-unit>
     <app-input-button-unit (submit)="addItem($event)"></app-input-button-unit>
@@ -20,7 +20,12 @@ import { TodoItem } from './interfaces/todo-item';
       <li *ngFor="let todoItem of todoList">
         <app-todo-item [item] = "todoItem"></app-todo-item>
       </li>
-    </ul>
+    </ul> -->
+
+    <h1>
+      Welcome to {{ title }}!
+    </h1>
+    <app-list-manager></app-list-manager>
   `,
   styleUrls: ['./app.component.scss'],
 })

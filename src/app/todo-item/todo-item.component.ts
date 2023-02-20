@@ -3,12 +3,14 @@ import { TodoItem } from '../interfaces/todo-item';
 
 @Component({
   selector: 'app-todo-item',
-  template: ` <p>todo-item works!</p> `,
+  template: ` <p>{{ item }} </p> `,
   styleUrls: ['./todo-item.component.scss'],
 })
 export class TodoItemComponent implements OnInit{
   @Input()
   item!: TodoItem;
+
+
 
   constructor (){}
 
