@@ -1,10 +1,11 @@
-.todo-input{
+.todo-input {
+  padding: 4px 10px 4px;
   font-size: 16px;
-  line-height: 25px;
-  font-family: 'Lucida Grande', verdana, sans-serif;
-  border: 1px solid #dddddd;
+  font-family: 'Lucida Grande', Verdana, sans-serif;
+  line-height: 20px;
+  border: solid 1px #dddddd;
   border-radius: 5px;
-  flex-grow: 1px;
+  flex-grow: 1;
 }
 
 :host(:not([hidden])) {
