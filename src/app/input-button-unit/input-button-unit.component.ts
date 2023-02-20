@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 
 @Component({
   selector: 'app-input-button-unit',
@@ -9,15 +9,22 @@ import { Component, OnInit } from '@angular/core';
       type="text"
       [value]="title"
       (keyup.enter)="changeTitle_ext(inputElementRef)"
+
     />
 
-    <button (click)="changeTitle_ext(inputElementRef)">Save</button>
+    <button (click)="submitValue(inputElementRef.value)">Save</button>
+    <!-- <button (click)="changeTitle_ext(inputElementRef)">Save</button> -->
     <!-- <button>Save</button> -->
+    <!-- (keyup.enter)="submitValue($event.target.value)" -->
   `,
   styleUrls: ['./input-button-unit.component.scss'],
 })
 export class InputButtonUnitComponent implements OnInit {
   title = 'Start: Step 1: Nothing';
+
+  @Output() submit: EventEmitter<string> = new EventEmitter<string>();
+
+
 
   constructor() {
     // // this.title = 'I Love Angular';
@@ -43,6 +50,10 @@ export class InputButtonUnitComponent implements OnInit {
   changeTitle_ext(inputElementReference: any) {
     // console.log('inputElementReference = ' + inputElementReference)
     this.title = inputElementReference.value; // the original functionality still works
+  }
+
+  submitValue(newTitle: string) {
+    this.submit.emit(newTitle);
   }
 
   generateTitle(): string {

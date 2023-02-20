@@ -6,9 +6,9 @@ import { TodoItem } from './interfaces/todo-item';
   // templateUrl: './app.component.html',
   template: `
     <h1 *ngIf="">Welcome to {{ title }}!</h1>
-    <app-input-button-unit></app-input-button-unit>
-    <app-input-button-unit></app-input-button-unit>
-    <app-input-button-unit></app-input-button-unit>
+    <app-input-button-unit (submit)="addItem($event)"></app-input-button-unit>
+    <app-input-button-unit (submit)="addItem($event)"></app-input-button-unit>
+    <app-input-button-unit (submit)="addItem($event)"></app-input-button-unit>
 
     <ul>
       <li *ngFor="let todoItem of todoList">
@@ -33,4 +33,7 @@ export class AppComponent {
     { title: 'serve app' },
     { title: 'develop app' },
   ];
+  addItem(title: string) {
+    this.todoList.push({ title });
+  }
 }
