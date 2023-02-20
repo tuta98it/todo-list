@@ -22,7 +22,7 @@ import { TodoItem } from './interfaces/todo-item';
       </li>
     </ul> -->
 
-    <h1>
+    <h1 class="app-title">
       Welcome to {{ title }}!
     </h1>
     <app-list-manager></app-list-manager>

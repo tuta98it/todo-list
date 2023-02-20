@@ -3,16 +3,18 @@ import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 @Component({
   selector: 'app-input-button-unit',
   template: `
-    <p>input-button-unit works!</p>
+    <!-- <p>input-button-unit works!</p> -->
     <input
+      class="todo-input"
       #inputElementRef
       type="text"
       [value]="title"
-      (keyup.enter)="changeTitle_ext(inputElementRef)"
-
+      (keyup.enter)="submitValueKeyEnter($event)"
     />
 
-    <button (click)="submitValue(inputElementRef.value)">Save</button>
+    <button class="btn" (click)="submitValue(inputElementRef.value)">
+      Save
+    </button>
     <!-- <button (click)="changeTitle_ext(inputElementRef)">Save</button> -->
     <!-- <button>Save</button> -->
     <!-- (keyup.enter)="submitValue($event.target.value)" -->
@@ -20,11 +22,9 @@ import { Component, OnInit, EventEmitter, Output } from '@angular/core';
   styleUrls: ['./input-button-unit.component.scss'],
 })
 export class InputButtonUnitComponent implements OnInit {
-  title = 'Start: Step 1: Nothing';
+  title = 'I Love You';
 
   @Output() submit: EventEmitter<string> = new EventEmitter<string>();
-
-
 
   constructor() {
     // // this.title = 'I Love Angular';
@@ -40,20 +40,25 @@ export class InputButtonUnitComponent implements OnInit {
     // }, 3000);
   }
 
-  changeTitle(e: Event): void {
-    // console.log(event);
-    const target = e.target as HTMLInputElement;
+  // changeTitle(e: Event): void {
+  //   // console.log(event);
+  //   const target = e.target as HTMLInputElement;
 
-    this.title = target.value; // the original functionality still works
-  }
+  //   this.title = target.value; // the original functionality still works
+  // }
 
-  changeTitle_ext(inputElementReference: any) {
-    // console.log('inputElementReference = ' + inputElementReference)
-    this.title = inputElementReference.value; // the original functionality still works
-  }
+  // changeTitle_ext(inputElementReference: any) {
+  //   // console.log('inputElementReference = ' + inputElementReference)
+  //   this.title = inputElementReference.value; // the original functionality still works
+  // }
 
   submitValue(newTitle: string) {
     this.submit.emit(newTitle);
+  }
+
+  submitValueKeyEnter(e: Event) {
+    var target = e.target as HTMLInputElement;
+    this.submit.emit(target.value);
   }
 
   generateTitle(): string {
