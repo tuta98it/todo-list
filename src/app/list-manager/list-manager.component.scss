@@ -29,7 +29,7 @@
   bottom: -3px;
   left: 0;
   right: 0;
-  -webkit-box-shadow: 0 1px 2px rgba(0,0,0, 0.1);
+  -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
 }
 
@@ -40,4 +40,37 @@
   border-color: #c4c4c4;
   -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
+}
+
+
+.btn {
+  font-size: 16px;
+  color: #555;
+  background-color: #f8f8f8;
+  width: 60%;
+}
+
+
+.todo-app .btn-detail {
+  display: flex;
+  justify-content: center;
+}
+
+
+.btn-align {
+  align-content: center;
+  align-items: center;
+}
+
+.block-detail {
+  display: grid;
+}
+
+.details-more {
+  padding: 5px;
+  font-size: 14px;
+  color:#3399FF;
+  text-align: end;
+  cursor: pointer;
+  margin-bottom: 10px;
 }

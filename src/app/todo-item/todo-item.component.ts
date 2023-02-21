@@ -5,22 +5,27 @@ import { TodoItem } from '../interfaces/todo-item';
   selector: 'app-todo-item',
   template: `
     <div class="todo-item">
+      <!-- warp button -->
       <div>
+        <!-- Input text -->
         <input
           type="checkbox"
           class="todo-checkbox"
           (click)="completeItem()"
           [checked]="item.completed"
         />
+
+        <!-- title doing -->
         <span
           class="todo-title"
           [ngClass]="{ 'todo-complete': item.completed }"
         >
           {{ item.title }}
         </span>
-      </div>
+       </div>
 
-      <button class="btn btn-red" (click)="removeItem()">remove</button>
+       <!-- Remove button -->
+      <button class="btn btn-red" (click)="removeItem()">Remove to-do</button>
     </div>
   `,
   styleUrls: ['./todo-item.component.scss'],

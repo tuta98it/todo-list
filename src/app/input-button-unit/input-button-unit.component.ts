@@ -12,9 +12,12 @@ import { Component, OnInit, EventEmitter, Output } from '@angular/core';
       (keyup.enter)="submitValueKeyEnter($event)"
     />
 
+    <!-- Button save -->
     <button class="btn" (click)="submitValue(inputElementRef.value)">
-      Save
+      Set up to-do
     </button>
+
+
     <!-- <button (click)="changeTitle_ext(inputElementRef)">Save</button> -->
     <!-- <button>Save</button> -->
     <!-- (keyup.enter)="submitValue($event.target.value)" -->

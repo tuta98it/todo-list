@@ -13,9 +13,22 @@ import { TodoListService } from '../services/todo-list.service';
           <app-todo-item
             [item]="todoItem"
             (remove)="removeItem($event)"
-            (update)="updateItem($event.item, $event.changes)"></app-todo-item>
+            (update)="updateItem($event.item, $event.changes)"
+          ></app-todo-item>
         </li>
       </ul>
+
+      <!-- Button Detail -->
+
+      <div class="block-detail">
+        <a class="details-more" (click)="showDetailTodolist()">
+          Details more >>
+        </a>
+
+        <router-outlet></router-outlet>
+      </div>
+
+      <!--  -->
     </div>
   `,
   styleUrls: ['./list-manager.component.scss'],
@@ -45,14 +58,42 @@ export class ListManagerComponent implements OnInit {
   ngOnInit(): void {}
 
   addItem(title: string): void {
-    this.todoListService.addItem({ title });
+    this.todoListService.addItem({
+      title: title,
+      completed: false,
+      cre_time: this.currentDate(),
+      comp_time: 'unspecified time',
+    });
   }
+
+  currentDate(): string {
+    var currentdate = new Date();
+    var datetime =
+      currentdate.getDate() +
+      '/' +
+      (currentdate.getMonth() + 1) +
+      '/' +
+      currentdate.getFullYear() +
+      ' @ ' +
+      currentdate.getHours() +
+      ':' +
+      currentdate.getMinutes() +
+      ':' +
+      currentdate.getSeconds();
+
+      return datetime;
+  }
+
+
 
   removeItem(item: any): void {
     this.todoListService.deleteItem(item);
   }
 
-  updateItem(item : any, changes : any): void {
+  updateItem(item: any, changes: any): void {
     this.todoListService.updateItem(item, changes);
   }
+
+  //Hiện thị ra thời điểm tạo(dd/MM/YYYY), trạng thái (Hoàn thành, đang thực hiện), thời điểm hoàn thành(dd/MM/YYYY).
+  showDetailTodolist() {}
 }

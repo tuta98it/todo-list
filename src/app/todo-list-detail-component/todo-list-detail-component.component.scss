@@ -1,0 +1,29 @@
+.block--table {
+  display: block;
+}
+
+
+.table_todolist--detail,
+.tr_todolist--detail,
+.th_todolist--detail,
+.td_todolist--detail {
+  border: 1px solid #333;
+  font-size: 12px;
+}
+
+.table_todolist--detail {
+  text-align: center;
+  width: 100%;
+  border-collapse: collapse;
+
+}
+
+
+
+
+.tr_todolist--detail {}
+
+
+.th_todolist--detail {}
+
+.td_todolist--detail {}
