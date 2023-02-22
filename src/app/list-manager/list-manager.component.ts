@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TodoItem } from '../interfaces/todo-item';
 import { TodoListService } from '../services/todo-list.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-list-manager',
@@ -18,16 +19,13 @@ import { TodoListService } from '../services/todo-list.service';
         </li>
       </ul>
 
-      <!-- Button Detail -->
+      <!-- Detail -->
 
       <div class="block-detail">
         <a class="details-more" (click)="showDetailTodolist()">
           Details more >>
         </a>
-
-        <router-outlet></router-outlet>
       </div>
-
       <!--  -->
     </div>
   `,
@@ -49,8 +47,12 @@ export class ListManagerComponent implements OnInit {
 
   todoList: TodoItem[];
   todoListService: TodoListService;
+  // router: any;
 
-  constructor(private todoListService_t: TodoListService) {
+  constructor(
+    private todoListService_t: TodoListService,
+    private router: Router
+  ) {
     this.todoListService = todoListService_t;
     this.todoList = todoListService_t.getTodoList();
   }
@@ -81,10 +83,8 @@ export class ListManagerComponent implements OnInit {
       ':' +
       currentdate.getSeconds();
 
-      return datetime;
+    return datetime;
   }
-
-
 
   removeItem(item: any): void {
     this.todoListService.deleteItem(item);
@@ -94,6 +94,8 @@ export class ListManagerComponent implements OnInit {
     this.todoListService.updateItem(item, changes);
   }
 
-  //Hiện thị ra thời điểm tạo(dd/MM/YYYY), trạng thái (Hoàn thành, đang thực hiện), thời điểm hoàn thành(dd/MM/YYYY).
-  showDetailTodolist() {}
+  // //Hiện thị ra thời điểm tạo(dd/MM/YYYY), trạng thái (Hoàn thành, đang thực hiện), thời điểm hoàn thành(dd/MM/YYYY).
+  showDetailTodolist() {
+    this.router.navigate(['detail']);
+  }
 }

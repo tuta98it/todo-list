@@ -9,6 +9,7 @@ import { TodoListService } from './services/todo-list.service';
 import { StorageService } from './services/storage.service';
 import { TodoListDetailComponentComponent } from './todo-list-detail-component/todo-list-detail-component.component';
 import { AppRoutingModule } from './app-routing.module';
+import { ShowDetailComponent } from './show-detail/show-detail.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { AppRoutingModule } from './app-routing.module';
     InputButtonUnitComponent,
     TodoItemComponent,
     ListManagerComponent,
-    TodoListDetailComponentComponent
+    TodoListDetailComponentComponent,
+    ShowDetailComponent
   ],
   imports: [
     BrowserModule,

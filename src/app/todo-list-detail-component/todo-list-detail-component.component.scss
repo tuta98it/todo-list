@@ -1,5 +1,42 @@
 .block--table {
+  // display: none;
   display: block;
+}
+
+.show--table{
+  display: block;
+}
+
+.btn {
+  font-size: 16px;
+  color: #555;
+  background-color: #f8f8f8;
+  width: 60%;
+}
+
+
+.todo-app .btn-detail {
+  display: flex;
+  justify-content: center;
+}
+
+
+.btn-align {
+  align-content: center;
+  align-items: center;
+}
+
+.block-detail {
+  display: grid;
+}
+
+.details-more {
+  padding: 5px;
+  font-size: 14px;
+  color: #3399FF;
+  text-align: end;
+  cursor: pointer;
+  margin-bottom: 10px;
 }
 
 
@@ -24,6 +61,8 @@
 .tr_todolist--detail {}
 
 
-.th_todolist--detail {}
+.th_todolist--detail {
+  width: 25%;
+}
 
 .td_todolist--detail {}

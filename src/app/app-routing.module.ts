@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { TodoListDetailComponentComponent } from './todo-list-detail-component/todo-list-detail-component.component';
+import { ShowDetailComponent } from './show-detail/show-detail.component';
 
 
 export const appRoutes: Routes = [
@@ -13,7 +14,15 @@ export const appRoutes: Routes = [
 
   {
     path: 'detail', component: TodoListDetailComponentComponent
-  }
+
+  },
+
+  // {
+  //   path: 'todo', component: TodoListDetailComponentComponent
+
+  // }
+
+
 ];
 
 
