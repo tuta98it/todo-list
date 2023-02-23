@@ -132,12 +132,13 @@ export class TodoListDetailComponentComponent implements OnInit {
   determineExecutionTime(item: TodoItem): string {
     var milliSecondDiff = (item.comp_time==null?0:parseInt(item.comp_time+'')) - (item.cre_time==null?0:parseInt(item.cre_time+''));
     var secondDiff = Math.floor(milliSecondDiff / 1000) ;
+    var second = secondDiff % 60;
     var minutes = Math.floor(secondDiff / 60);
     var hour = Math.floor(minutes / 60);
     var minute = Math.floor(minutes % 60);
 
 
-    return hour.toString()  + ":" + minute.toString();
+    return hour.toString()  + ":" + minute.toString() + ":" + minute.toString();
     // var timeStart = new Date('01/01/2007 ' + item.cre_time).getHours();
     // var timeEnd = new Date('01/01/2007 ' + item.comp_time).getHours();
 
