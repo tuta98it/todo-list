@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { TodoItem } from '../interfaces/todo-item';
 import { TodoListService } from '../services/todo-list.service';
 import { Router } from '@angular/router';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-list-manager',
@@ -22,7 +23,7 @@ import { Router } from '@angular/router';
       <!-- Detail -->
 
       <div class="block-detail">
-        <a class="details-more" (click)="showDetailTodolist()">
+        <a class="details-more--button" (click)="showDetailTodolist()">
           Details more >>
         </a>
       </div>
@@ -83,8 +84,7 @@ export class ListManagerComponent implements OnInit {
     this.todoListServiceMain.addItem({
       title: title,
       completed: false,
-      cre_time: this.currentDate(),
-      comp_time: 'unspecified time',
+      cre_time: Date.now(),
     });
 
     // this.todoListServiceDetail.addItem({

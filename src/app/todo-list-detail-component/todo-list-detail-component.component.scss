@@ -49,8 +49,8 @@
 .th_todolist--detail,
 .td_todolist--detail {
   // border: 1px solid #333;
-  font-size: 16px;
-  font-weight: 20px;
+  font-size: 12px;
+  // font-weight: 20px;
 }
 
 .table_todolist--detail {
@@ -69,7 +69,24 @@
 .tr_todolist--detail {
   border-bottom: 1px solid rgb(0, 0, 0, 0.1);
   padding: 10px 0px;
+
+
 }
+
+.tr_todolist--detail:hover {
+  box-shadow: 0px 0px 5px #888888;
+  background-color: #dddddd;
+  font-weight: bold;
+  opacity: 0.8;
+
+
+}
+
+.tr-box-shadow {
+  display: contents;
+}
+
+
 
 .alpha-1 {
   border-bottom: 1px solid rgb(0, 0, 0, 0.8);
@@ -78,12 +95,29 @@
 
 
 .th_todolist--detail {
+  font-size: 16px;
   width: 25%;
+
+  // box-shadow: 1px 2.5px 5px #888888;
+  box-shadow: 0px 0px 5px #888888;
+  background-color: #dddddd;
+  font-weight: bold;
+  opacity: 1;
 }
 
 .td_todolist--detail {
   width: 25%;
   letter-spacing: 0.5px;
+}
+
+.td_todolist--detail:hover {
+  // box-shadow: 1px 2.5px 5px #888888;
+  box-shadow: 0px 0px 5px #888888;
+  background-color: #dddddd;
+  font-weight: bold;
+  opacity: 1;
+  // background-color: red;
+
 }
 
 .border-status {
@@ -104,20 +138,23 @@
 
 .status-proses {
   border-color: rgb(255, 174, 0);
-  ;
   color: rgb(255, 174, 0);
-  ;
 }
 
 
-.back {
+.back--button {
   position: absolute;
-  bottom: -56px;
+  text-align: end;
   left: 0px;
-  padding: 5px;
+  bottom: -56px;
+  padding: 8px;
+  margin-bottom: 10px;
   font-size: 14px;
   color: #3399FF;
-  text-align: end;
+
+}
+
+.back--button:hover {
+  opacity: 0.8;
   cursor: pointer;
-  margin-bottom: 10px;
 }

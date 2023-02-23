@@ -65,16 +65,23 @@ export class TodoItemComponent implements OnInit {
   saveItem() {
     this.isExpression = !this.isExpression;
     this.update.emit({
-      item: this.item
+      item: this.item,
     });
   }
 
   completeItem(): void {
-    console.log('click checkbox: ' + this.item.completed);
-
-    this.update.emit({
-      item: this.item,
-      changes: { completed: !this.item.completed },
-    });
+    console.log('this.item.completed) == ' + this.item.completed);
+    if (!this.item.completed) {
+      this.update.emit({
+        item: this.item,
+        changes: { completed: !this.item.completed, comp_time: Date.now() },
+      });
+    }else{
+      this.update.emit({
+        item: this.item,
+        changes: { completed: !this.item.completed, comp_time: null },
+      });
+    }
+    ;
   }
 }

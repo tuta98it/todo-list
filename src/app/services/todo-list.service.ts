@@ -45,6 +45,11 @@ export class TodoListService {
   updateItem(item : any, changes : any): void {
     const index = this.todoList.indexOf(item);
     this.todoList[index] = { ...item, ...changes };
+    // item.complete = changes;
+    // item.comp_time = time_complte;
+    // this.todoList[index] = item;
+
+
     this.saveList();
   }
 

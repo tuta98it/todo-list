@@ -24,9 +24,12 @@ import { Router } from '@angular/router';
             <th class="th_todolist--detail">Status</th>
             <th class="th_todolist--detail">Creation time</th>
             <th class="th_todolist--detail">Component time</th>
+            <th class="th_todolist--detail">Implementation time</th>
           </tr>
+
           <tr class="tr_todolist--detail" *ngFor="let todoItem of todoList">
             <td class="td_todolist--detail">{{ todoItem.title }}</td>
+
             <td class="td_todolist--detail">
               <div
                 class="border-status"
@@ -38,16 +41,30 @@ import { Router } from '@angular/router';
                 {{ setStatus(todoItem.completed) }}
               </div>
             </td>
-            <td class="td_todolist--detail">{{ todoItem.cre_time }}</td>
+
             <td class="td_todolist--detail">
-              {{ setCompleteTime(todoItem.completed) }}
+              {{ todoItem.cre_time | date : 'medium' }}
+            </td>
+
+            <td class="td_todolist--detail">
+              {{
+                isCompleteTime(todoItem)
+                  ? (todoItem.comp_time | date : 'medium')
+                  : '---'
+              }}
+            </td>
+
+            <td class="td_todolist--detail">
+              {{
+                isCompleteTime(todoItem)
+                  ? (determineExecutionTime(todoItem))
+                  : '---'
+              }}
             </td>
           </tr>
 
-          <a class="back" (click)="showDetailTodolist()"> << Back </a>
+          <a class="back--button" (click)="showDetailTodolist()"> << Back </a>
         </table>
-
-
       </div>
     </div>
 
@@ -108,10 +125,25 @@ export class TodoListDetailComponentComponent implements OnInit {
   }
 
   // Thiết lập thời gian hoàn thành một đầu việc
-  setCompleteTime(status?: boolean) {
-    return status ? this.currentDate() : 'unspecified time';
+  isCompleteTime(item: TodoItem) {
+    return typeof item.comp_time == 'number';
   }
 
+  determineExecutionTime(item: TodoItem): string {
+    var milliSecondDiff = (item.comp_time==null?0:parseInt(item.comp_time+'')) - (item.cre_time==null?0:parseInt(item.cre_time+''));
+    var secondDiff = Math.floor(milliSecondDiff / 1000) ;
+    var minutes = Math.floor(secondDiff / 60);
+    var hour = Math.floor(minutes / 60);
+    var minute = Math.floor(minutes % 60);
+
+
+    return hour.toString()  + ":" + minute.toString();
+    // var timeStart = new Date('01/01/2007 ' + item.cre_time).getHours();
+    // var timeEnd = new Date('01/01/2007 ' + item.comp_time).getHours();
+
+    // var hourDiff = timeEnd - timeStart;
+    // return hourDiff;
+  }
   currentDate(): string {
     var currentdate = new Date();
     var datetime =
@@ -153,7 +185,5 @@ export class TodoListDetailComponentComponent implements OnInit {
     // this.isShowDetail = !this.isShowDetail;
 
     this.router.navigate(['']);
-
-
   }
 }
