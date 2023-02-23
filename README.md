@@ -26,6 +26,8 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
 
-Review
+## Review
+
 ![Interface Appweb Todo-list](./img/Interface-Todolist.png "This is main interface app Todo-list").
 
+![ Table detail Todo-list](./img/table-detail-todolist.png "This is table detail app Todo-list").
