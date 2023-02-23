@@ -5,6 +5,7 @@ import { Component, OnInit, EventEmitter, Output } from '@angular/core';
   template: `
     <!-- <p>input-button-unit works!</p> -->
     <input
+
       class="todo-input"
       #inputElementRef
       type="text"
@@ -16,7 +17,6 @@ import { Component, OnInit, EventEmitter, Output } from '@angular/core';
     <button class="btn" (click)="submitValue(inputElementRef.value)">
       Set up to-do
     </button>
-
 
     <!-- <button (click)="changeTitle_ext(inputElementRef)">Save</button> -->
     <!-- <button>Save</button> -->

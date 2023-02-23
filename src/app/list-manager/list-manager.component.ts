@@ -6,11 +6,11 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-list-manager',
   template: `
-    <div class="todo-app">
+    <div *ngIf='isShowTodoList' class="todo-app">
       <app-input-button-unit (submit)="addItem($event)"></app-input-button-unit>
 
       <ul>
-        <li *ngFor="let todoItem of todoList">
+        <li *ngFor="let todoItem of todoListMain">
           <app-todo-item
             [item]="todoItem"
             (remove)="removeItem($event)"
@@ -27,11 +27,17 @@ import { Router } from '@angular/router';
         </a>
       </div>
       <!--  -->
+
+
     </div>
+
+    <!-- <app-todo-list-detail-component  (hide)="hideTodoList()"></app-todo-list-detail-component> -->
   `,
   styleUrls: ['./list-manager.component.scss'],
 })
 export class ListManagerComponent implements OnInit {
+  isShowTodoList = true;
+
   // todoList: TodoItem[] = [
   //   { title: 'install NodeJS' },
   //   { title: 'install Angular CLI' },
@@ -45,27 +51,48 @@ export class ListManagerComponent implements OnInit {
   //   todoListService.getTodoList();
   // }
 
-  todoList: TodoItem[];
-  todoListService: TodoListService;
+  todoListMain: TodoItem[];
+  todoListServiceMain: TodoListService;
+
+  todoListDetail: TodoItem[];
+  todoListServiceDetail: TodoListService;
+
   // router: any;
 
   constructor(
-    private todoListService_t: TodoListService,
+    private todoListServiceMain_t: TodoListService,
+    private todoListServiceDetail_t: TodoListService,
     private router: Router
   ) {
-    this.todoListService = todoListService_t;
-    this.todoList = todoListService_t.getTodoList();
+    this.todoListServiceMain = todoListServiceMain_t;
+    this.todoListMain = todoListServiceMain_t.getTodoList();
+
+    this.todoListServiceDetail = todoListServiceDetail_t;
+    this.todoListDetail = todoListServiceDetail_t.getTodoList();
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    // this.hideTodoList();
+  }
+
+  hideTodoList() {
+    this.isShowTodoList = false;
+  }
 
   addItem(title: string): void {
-    this.todoListService.addItem({
+    this.todoListServiceMain.addItem({
       title: title,
       completed: false,
       cre_time: this.currentDate(),
       comp_time: 'unspecified time',
     });
+
+    // this.todoListServiceDetail.addItem({
+    //   title: title,
+    //   completed: false,
+    //   cre_time: this.currentDate(),
+    //   comp_time: 'unspecified time',
+    // });
   }
 
   currentDate(): string {
@@ -87,15 +114,19 @@ export class ListManagerComponent implements OnInit {
   }
 
   removeItem(item: any): void {
-    this.todoListService.deleteItem(item);
+    this.todoListServiceMain.deleteItem(item);
   }
 
   updateItem(item: any, changes: any): void {
-    this.todoListService.updateItem(item, changes);
+    this.todoListServiceMain.updateItem(item, changes);
+    // this.todoListServiceDetail.updateItem(item, changes);
   }
 
   // //Hiện thị ra thời điểm tạo(dd/MM/YYYY), trạng thái (Hoàn thành, đang thực hiện), thời điểm hoàn thành(dd/MM/YYYY).
   showDetailTodolist() {
     this.router.navigate(['detail']);
+
+    //1. Chạy tính năng ẩn TodoList
+    // this.hideTodoList();
   }
 }

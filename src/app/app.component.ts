@@ -26,12 +26,17 @@ import { TodoItem } from './interfaces/todo-item';
     <h1 class="app-title">
       Welcome to {{ title }}!
     </h1>
-    <app-list-manager></app-list-manager>
+    <router-outlet></router-outlet>
   `,
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
   title = 'todo-list';
+  isShow = true;
+
+  hideListManage(){
+    this.isShow = false;
+  }
   // todoList : TodoItem[] = [
   //   { title: 'install NodeJS' },
   //   { title: 'install Angular CLI' },

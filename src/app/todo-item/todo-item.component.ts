@@ -1,31 +1,45 @@
 import { Component, Input, OnInit, EventEmitter, Output } from '@angular/core';
 import { TodoItem } from '../interfaces/todo-item';
+// import { NzInputModule } from 'ng-zorro-antd/input';
 
 @Component({
   selector: 'app-todo-item',
   template: `
     <div class="todo-item">
-      <!-- warp button -->
-      <div>
-        <!-- Input text -->
-        <input
-          type="checkbox"
-          class="todo-checkbox"
-          (click)="completeItem()"
-          [checked]="item.completed"
-        />
+      <div class="wrap-check-text-edit-save">
+        <div class="check-text">
+          <!-- Check text -->
+          <input
+            type="checkbox"
+            class="todo-checkbox"
+            (click)="completeItem()"
+            [checked]="item.completed"
+          />
 
-        <!-- title doing -->
-        <span
-          class="todo-title"
-          [ngClass]="{ 'todo-complete': item.completed }"
-        >
-          {{ item.title }}
-        </span>
-       </div>
+          <!-- title doing -->
+          <input
+            [disabled]="isExpression"
+            class="todo-title"
+            nz-input
+            type="text"
+            [ngClass]="{ 'todo-complete': item.completed }"
+            [(ngModel)]="item.title"
+          />
+        </div>
 
-       <!-- Remove button -->
-      <button class="btn btn-red" (click)="removeItem()">Remove to-do</button>
+        <div class="edit-save-button">
+          <!-- Edit and Save button -->
+          <button *ngIf="isExpression" class="btn " (click)="editItem()">
+            Edit
+          </button>
+          <button *ngIf="!isExpression" class="btn " (click)="saveItem()">
+            Save
+          </button>
+        </div>
+      </div>
+
+      <!-- Remove button -->
+      <button class="btn btn-red" (click)="removeItem()">Remove</button>
     </div>
   `,
   styleUrls: ['./todo-item.component.scss'],
@@ -33,6 +47,7 @@ import { TodoItem } from '../interfaces/todo-item';
 export class TodoItemComponent implements OnInit {
   @Input()
   item!: TodoItem;
+  isExpression = true;
 
   @Output() remove: EventEmitter<TodoItem> = new EventEmitter<TodoItem>();
   @Output() update: EventEmitter<any> = new EventEmitter<any>();
@@ -42,7 +57,21 @@ export class TodoItemComponent implements OnInit {
   removeItem(): void {
     this.remove.emit(this.item);
   }
+
+  editItem() {
+    this.isExpression = !this.isExpression;
+  }
+
+  saveItem() {
+    this.isExpression = !this.isExpression;
+    this.update.emit({
+      item: this.item
+    });
+  }
+
   completeItem(): void {
+    console.log('click checkbox: ' + this.item.completed);
+
     this.update.emit({
       item: this.item,
       changes: { completed: !this.item.completed },

@@ -1,18 +1,25 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  OnInit,
+  ViewChild,
+  EventEmitter,
+  Output,
+} from '@angular/core';
 import { TodoItem } from '../interfaces/todo-item';
 import { TodoListService } from '../services/todo-list.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-todo-list-detail-component',
   template: `
     <div class="block-detail">
-      <a class="details-more js-details-more" (click)="showDetailTodolist()">
+      <!-- <a class="details-more js-details-more" (click)="showDetailTodolist()">
         Details more >>
-      </a>
-
+      </a> -->
       <div *ngIf="isShowDetail" class="block--table">
         <table class="table_todolist--detail">
-          <tr class="tr_todolist--detail">
+          <tr class="tr_todolist--detail alpha-1">
             <th class="th_todolist--detail">Work to do</th>
             <th class="th_todolist--detail">Status</th>
             <th class="th_todolist--detail">Creation time</th>
@@ -21,14 +28,26 @@ import { TodoListService } from '../services/todo-list.service';
           <tr class="tr_todolist--detail" *ngFor="let todoItem of todoList">
             <td class="td_todolist--detail">{{ todoItem.title }}</td>
             <td class="td_todolist--detail">
-              {{ setStatus(todoItem.completed) }}
+              <div
+                class="border-status"
+                [ngClass]="{
+                  'status-complete': todoItem.completed,
+                  'status-proses': !todoItem.completed
+                }"
+              >
+                {{ setStatus(todoItem.completed) }}
+              </div>
             </td>
             <td class="td_todolist--detail">{{ todoItem.cre_time }}</td>
             <td class="td_todolist--detail">
               {{ setCompleteTime(todoItem.completed) }}
             </td>
           </tr>
+
+          <a class="back" (click)="showDetailTodolist()"> << Back </a>
         </table>
+
+
       </div>
     </div>
 
@@ -55,15 +74,17 @@ import { TodoListService } from '../services/todo-list.service';
 export class TodoListDetailComponentComponent implements OnInit {
   todoList: TodoItem[];
   todoListService: TodoListService;
+  @Output() hide: EventEmitter<string> = new EventEmitter<string>();
 
-  isShowDetail = false;
+  isShowDetail = true;
 
   // statusTable = false;
 
   constructor(
     private todoListService_t: TodoListService,
     private detailMore: ElementRef,
-    private blockTableDetail: ElementRef
+    private blockTableDetail: ElementRef,
+    private router: Router
   ) {
     this.todoListService = todoListService_t;
     this.todoList = todoListService_t.getTodoList();
@@ -73,6 +94,13 @@ export class TodoListDetailComponentComponent implements OnInit {
     //   // this.blockTableDetail.nativeElement.querySelector('ts-block--table').add('show--table');
     //   console.log("ts-details-more click")
     // });
+    ///
+    /// Ẩn cái TodoList đi;
+    this.hideTodoList();
+  }
+
+  hideTodoList() {
+    this.hide.emit();
   }
 
   setStatus(status?: boolean): string {
@@ -120,8 +148,12 @@ export class TodoListDetailComponentComponent implements OnInit {
     // [ngClass]="{ 'todo-complete': item.completed }"
 
     // this.detailMore.addEventListener( )
-    console.log('showDetailTodolist');
+    // console.log('showDetailTodolist');
 
-    this.isShowDetail = !this.isShowDetail;
+    // this.isShowDetail = !this.isShowDetail;
+
+    this.router.navigate(['']);
+
+
   }
 }

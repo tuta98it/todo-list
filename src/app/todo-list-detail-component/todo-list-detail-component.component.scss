@@ -1,9 +1,4 @@
-.block--table {
-  // display: none;
-  display: block;
-}
-
-.show--table{
+.show--table {
   display: block;
 }
 
@@ -27,8 +22,17 @@
 }
 
 .block-detail {
-  display: grid;
+  display: block;
 }
+
+.block--table {
+  // display: none;
+
+  display: block;
+  // display: flex;
+  // justify-content: space-around;
+}
+
 
 .details-more {
   padding: 5px;
@@ -44,25 +48,76 @@
 .tr_todolist--detail,
 .th_todolist--detail,
 .td_todolist--detail {
-  border: 1px solid #333;
-  font-size: 12px;
+  // border: 1px solid #333;
+  font-size: 16px;
+  font-weight: 20px;
 }
 
 .table_todolist--detail {
+  position: relative;
   text-align: center;
-  width: 100%;
+  width: 50%;
   border-collapse: collapse;
+  margin: auto;
+  // display: table-row;
 
 }
 
 
 
 
-.tr_todolist--detail {}
+.tr_todolist--detail {
+  border-bottom: 1px solid rgb(0, 0, 0, 0.1);
+  padding: 10px 0px;
+}
+
+.alpha-1 {
+  border-bottom: 1px solid rgb(0, 0, 0, 0.8);
+}
+
 
 
 .th_todolist--detail {
   width: 25%;
 }
 
-.td_todolist--detail {}
+.td_todolist--detail {
+  width: 25%;
+  letter-spacing: 0.5px;
+}
+
+.border-status {
+  display: inline-block;
+  text-align: center;
+  padding: 4px 12px;
+  margin: 10px 0px;
+  border: 1px solid;
+  border-color: #333;
+  color: #333;
+}
+
+
+.status-complete {
+  border-color: rgb(0, 255, 0.5);
+  color: rgb(0, 255, 0.5);
+}
+
+.status-proses {
+  border-color: rgb(255, 174, 0);
+  ;
+  color: rgb(255, 174, 0);
+  ;
+}
+
+
+.back {
+  position: absolute;
+  bottom: -56px;
+  left: 0px;
+  padding: 5px;
+  font-size: 14px;
+  color: #3399FF;
+  text-align: end;
+  cursor: pointer;
+  margin-bottom: 10px;
+}

@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { TodoListDetailComponentComponent } from './todo-list-detail-component/todo-list-detail-component.component';
-import { ShowDetailComponent } from './show-detail/show-detail.component';
+import { ListManagerComponent } from './list-manager/list-manager.component';
+
 
 
 export const appRoutes: Routes = [
@@ -10,7 +11,10 @@ export const appRoutes: Routes = [
   //   { path: 'child', component: ChildHomeComponent, },
   // ]},
 
+  {
+    path: '', component: ListManagerComponent
 
+  },
 
   {
     path: 'detail', component: TodoListDetailComponentComponent

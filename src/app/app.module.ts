@@ -9,7 +9,7 @@ import { TodoListService } from './services/todo-list.service';
 import { StorageService } from './services/storage.service';
 import { TodoListDetailComponentComponent } from './todo-list-detail-component/todo-list-detail-component.component';
 import { AppRoutingModule } from './app-routing.module';
-import { ShowDetailComponent } from './show-detail/show-detail.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -17,12 +17,12 @@ import { ShowDetailComponent } from './show-detail/show-detail.component';
     InputButtonUnitComponent,
     TodoItemComponent,
     ListManagerComponent,
-    TodoListDetailComponentComponent,
-    ShowDetailComponent
+    TodoListDetailComponentComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    FormsModule
   ],
   providers: [TodoListService, StorageService],
   bootstrap: [AppComponent]
