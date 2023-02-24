@@ -7,8 +7,14 @@ import { DatePipe } from '@angular/common';
 @Component({
   selector: 'app-list-manager',
   template: `
-    <div *ngIf='isShowTodoList' class="todo-app">
+    <div *ngIf="isShowTodoList" class="todo-app">
       <app-input-button-unit (submit)="addItem($event)"></app-input-button-unit>
+
+      <div class="block-button-all">
+        <button class="btn" (click)="selectAll()">Select All</button>
+
+        <button class="btn btn-red" (click)="removeAll()">Remove All</button>
+      </div>
 
       <ul>
         <li *ngFor="let todoItem of todoListMain">
@@ -29,7 +35,7 @@ import { DatePipe } from '@angular/common';
       </div>
       <!--  -->
 
-
+      <router-outlet></router-outlet>
     </div>
 
     <!-- <app-todo-list-detail-component  (hide)="hideTodoList()"></app-todo-list-detail-component> -->
@@ -122,9 +128,25 @@ export class ListManagerComponent implements OnInit {
     // this.todoListServiceDetail.updateItem(item, changes);
   }
 
+  selectAll() {
+    // this.todoListServiceMain.addItem({
+    //   title: title,
+    //   completed: false,
+    //   cre_time: Date.now(),
+    // });
+
+    this.todoListServiceMain.checkAllTodo();
+  }
+
+
+
+  removeAll() {
+    this.todoListServiceMain.removeAllTodo();
+  }
+
   // //Hiện thị ra thời điểm tạo(dd/MM/YYYY), trạng thái (Hoàn thành, đang thực hiện), thời điểm hoàn thành(dd/MM/YYYY).
   showDetailTodolist() {
-    this.router.navigate(['detail']);
+    this.router.navigate(['table-detail']);
 
     //1. Chạy tính năng ẩn TodoList
     // this.hideTodoList();

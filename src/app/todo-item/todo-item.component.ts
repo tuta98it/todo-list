@@ -8,6 +8,7 @@ import { TodoItem } from '../interfaces/todo-item';
     <div class="todo-item">
       <div class="wrap-check-text-edit-save">
         <div class="check-text">
+
           <!-- Check text -->
           <input
             type="checkbox"

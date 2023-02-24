@@ -27,7 +27,7 @@ export class TodoListService {
   // ];
 
   todoList: TodoItem[];
-
+  isSelect = true;
   constructor(private storageService: StorageService) {
     this.todoList =
       storageService.getData(todoListStorageKey) || defaultTodoList;
@@ -35,23 +35,46 @@ export class TodoListService {
 
   saveList(): void {
     this.storageService.setData(todoListStorageKey, this.todoList);
-}
+  }
 
   addItem(item: TodoItem): void {
     this.todoList.push(item);
+    // this.todoList = [...this.todoList,item];
     this.saveList();
   }
 
-  updateItem(item : any, changes : any): void {
+  updateItem(item: any, changes: any): void {
     const index = this.todoList.indexOf(item);
     this.todoList[index] = { ...item, ...changes };
     // item.complete = changes;
     // item.comp_time = time_complte;
     // this.todoList[index] = item;
-
-
     this.saveList();
   }
+
+  checkAllTodo(): void {
+    // const index = this.todoList.indexOf(item);
+    // this.todoList[index] = { ...item, ...changes };
+    // item.complete = changes;
+    // item.comp_time = time_complte;
+    // this.todoList[index] = item;
+
+    for (let index in this.todoList) {
+      var changes = {}
+      if (this.isSelect) {
+        changes = { completed: this.isSelect, comp_time: Date.now() };
+        this.todoList[index] = { ...this.todoList[index], ...changes };
+      }else{
+        changes = { completed: this.isSelect, comp_time: null };
+        this.todoList[index] = { ...this.todoList[index], ...changes };
+      }
+    }
+    this.isSelect = !this.isSelect;
+    this.saveList();
+  }
+
+
+
 
   deleteItem(item: any): void {
     const index = this.todoList.indexOf(item);
@@ -59,8 +82,20 @@ export class TodoListService {
     this.saveList();
   }
 
+
+  removeAllTodo(){
+    // console.log('removeAllTodo()');
+    //console.log(this.todoList);
+    //this.todoList.length = 0;
+    //this.todoList = [];
+    console.log(this.todoList);
+    this.todoList.length = 0;
+    console.log(this.todoList);
+    this.saveList();
+  }
+
+
   getTodoList(): TodoItem[] {
     return this.todoList;
   }
-
 }

@@ -11,7 +11,70 @@
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
   margin: 20px auto;
 
+  // animation
+  animation-name: show_todo-list;
+  animation-delay: 0s;
+  animation-direction: normal;
+  animation-duration: 500ms;
+  animation-fill-mode: none;
+  animation-iteration-count: 1;
+  animation-play-state: running;
+  animation-timing-function: linear;
+
 }
+
+
+.block-button-all {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
+}
+
+.btn {
+  background: lightseagreen;
+  color: #fff;
+  padding: 3px 10px;
+  margin: 0 0 0 3px;
+  border: none;
+  border-radius: 5px;
+  font-size: 12px;
+  line-height: 24px;
+  cursor: pointer;
+  vertical-align: bottom;
+}
+
+.btn:hover {
+  background: lightseagreen;
+  opacity: 0.8;
+}
+
+.btn-red {
+  background: red;
+}
+
+.btn-red:hover {
+  background: red;
+  opacity: 0.8;
+}
+
+@keyframes show_todo-list {
+  0% {
+    box-shadow: 6px -4px 20px #fff;
+    transform: scale(0.2);
+    // transform : rotate(270deg);
+    opacity: 0.25;
+    right: -100px;
+  }
+
+  100% {
+    box-shadow: 6px -4px 2px #fff;
+    transform: scale(1);
+    // transform : rotate(0deg);
+    opacity: 1;
+    right: 0;
+  }
+}
+
 
 .todo-app::before,
 .todo-app::after {
@@ -43,13 +106,6 @@
 }
 
 
-.btn {
-  font-size: 16px;
-  color: #555;
-  background-color: #f8f8f8;
-  width: 60%;
-}
-
 
 .todo-app .btn-detail {
   display: flex;
@@ -71,10 +127,10 @@
   text-align: end;
   margin-bottom: 10px;
   font-size: 14px;
-  color:#3399FF;
+  color: #3399FF;
 }
 
-.details-more--button:hover{
+.details-more--button:hover {
   opacity: 0.8;
   cursor: pointer;
 }

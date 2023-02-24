@@ -5,6 +5,7 @@ import {
   ViewChild,
   EventEmitter,
   Output,
+
 } from '@angular/core';
 import { TodoItem } from '../interfaces/todo-item';
 import { TodoListService } from '../services/todo-list.service';
@@ -19,7 +20,7 @@ import { Router } from '@angular/router';
       </a> -->
       <div *ngIf="isShowDetail" class="block--table">
         <table class="table_todolist--detail">
-          <tr class="tr_todolist--detail alpha-1">
+          <tr class="tr-header_todolist--detail alpha-1">
             <th class="th_todolist--detail">Work to do</th>
             <th class="th_todolist--detail">Status</th>
             <th class="th_todolist--detail">Creation time</th>
@@ -27,7 +28,7 @@ import { Router } from '@angular/router';
             <th class="th_todolist--detail">Implementation time</th>
           </tr>
 
-          <tr class="tr_todolist--detail" *ngFor="let todoItem of todoList">
+          <tr class="tr_todolist--detail" *ngFor="let todoItem of todoList"  (click)="showDetailTodoItem(todoItem)">
             <td class="td_todolist--detail">{{ todoItem.title }}</td>
 
             <td class="td_todolist--detail">
@@ -91,7 +92,7 @@ import { Router } from '@angular/router';
 export class TodoListDetailComponentComponent implements OnInit {
   todoList: TodoItem[];
   todoListService: TodoListService;
-  @Output() hide: EventEmitter<string> = new EventEmitter<string>();
+  // @Output() hide: EventEmitter<string> = new EventEmitter<string>();
 
   isShowDetail = true;
 
@@ -113,12 +114,12 @@ export class TodoListDetailComponentComponent implements OnInit {
     // });
     ///
     /// Ẩn cái TodoList đi;
-    this.hideTodoList();
+    // this.hideTodoList();
   }
 
-  hideTodoList() {
-    this.hide.emit();
-  }
+  // hideTodoList() {
+  //   this.hide.emit();
+  // }
 
   setStatus(status?: boolean): string {
     return status ? 'Complete!' : 'Processing...';
@@ -186,5 +187,11 @@ export class TodoListDetailComponentComponent implements OnInit {
     // this.isShowDetail = !this.isShowDetail;
 
     this.router.navigate(['']);
+  }
+
+
+  showDetailTodoItem(item: TodoItem){
+    const index = this.todoList.indexOf(item)
+    this.router.navigate(['table-detail/' + index.toString()]);
   }
 }

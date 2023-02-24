@@ -10,6 +10,7 @@ import { StorageService } from './services/storage.service';
 import { TodoListDetailComponentComponent } from './todo-list-detail-component/todo-list-detail-component.component';
 import { AppRoutingModule } from './app-routing.module';
 import { FormsModule } from '@angular/forms';
+import { DetailTodoItemComponent } from './detail-todo-item/detail-todo-item.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { FormsModule } from '@angular/forms';
     InputButtonUnitComponent,
     TodoItemComponent,
     ListManagerComponent,
-    TodoListDetailComponentComponent
+    TodoListDetailComponentComponent,
+    DetailTodoItemComponent
   ],
   imports: [
     BrowserModule,

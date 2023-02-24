@@ -5,7 +5,6 @@ import { Component, OnInit, EventEmitter, Output } from '@angular/core';
   template: `
     <!-- <p>input-button-unit works!</p> -->
     <input
-
       class="todo-input"
       #inputElementRef
       type="text"
@@ -56,12 +55,23 @@ export class InputButtonUnitComponent implements OnInit {
   // }
 
   submitValue(newTitle: string) {
-    this.submit.emit(newTitle);
+    if (!this.isEmpty(newTitle)) {
+      this.submit.emit(newTitle);
+      this.title = '';
+    }
   }
 
   submitValueKeyEnter(e: Event) {
     var target = e.target as HTMLInputElement;
-    this.submit.emit(target.value);
+    if (!this.isEmpty(target.value)) {
+      this.submit.emit(target.value);
+
+      this.title = '';
+    }
+  }
+
+  isEmpty(str: string) {
+    return !str || str.length === 0;
   }
 
   generateTitle(): string {
