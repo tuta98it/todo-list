@@ -5,7 +5,6 @@ import {
   ViewChild,
   EventEmitter,
   Output,
-
 } from '@angular/core';
 import { TodoItem } from '../interfaces/todo-item';
 import { TodoListService } from '../services/todo-list.service';
@@ -21,14 +20,44 @@ import { Router } from '@angular/router';
       <div *ngIf="isShowDetail" class="block--table">
         <table class="table_todolist--detail">
           <tr class="tr-header_todolist--detail alpha-1">
-            <th class="th_todolist--detail">Work to do</th>
-            <th class="th_todolist--detail">Status</th>
-            <th class="th_todolist--detail">Creation time</th>
-            <th class="th_todolist--detail">Component time</th>
-            <th class="th_todolist--detail">Implementation time</th>
+            <th class="th_todolist--detail">
+              <div class="flex align-items-center justify-content-center">
+                <i class="pi pi-list mr-2"></i>
+                <span> Work to do </span>
+              </div>
+            </th>
+            <th class="th_todolist--detail">
+              <div class="flex align-items-center justify-content-center">
+                <i class="pi pi-verified mr-2"></i>
+                <span> Status </span>
+              </div>
+            </th>
+            <th class="th_todolist--detail">
+              <div class="flex align-items-center justify-content-center">
+                <i class="pi pi-clock mr-2"></i>
+                <span> Creation time </span>
+              </div>
+            </th>
+
+            <th class="th_todolist--detail">
+              <div class="flex align-items-center justify-content-center">
+                <i class="pi pi-stopwatch mr-2"></i>
+                <span> Complete time </span>
+              </div>
+            </th>
+            <th class="th_todolist--detail">
+              <div class="flex align-items-center justify-content-center">
+                <i class="pi pi-hourglass mr-2"></i>
+                <span> Implementation time </span>
+              </div>
+            </th>
           </tr>
 
-          <tr class="tr_todolist--detail" *ngFor="let todoItem of todoList"  (click)="showDetailTodoItem(todoItem)">
+          <tr
+            class="tr_todolist--detail"
+            *ngFor="let todoItem of todoList"
+            (click)="showDetailTodoItem(todoItem)"
+          >
             <td class="td_todolist--detail">{{ todoItem.title }}</td>
 
             <td class="td_todolist--detail">
@@ -58,14 +87,24 @@ import { Router } from '@angular/router';
             <td class="td_todolist--detail">
               {{
                 isCompleteTime(todoItem)
-                  ? (determineExecutionTime(todoItem))
+                  ? determineExecutionTime(todoItem)
                   : '---'
               }}
             </td>
           </tr>
-
-          <a class="back--button" (click)="showDetailTodolist()"> << Back </a>
         </table>
+
+
+        <div
+          class="flex align-item-center justify-content-start flex-direction-row text-sm font-italic back--button "
+        >
+          <i
+            class="flex justify-content-center align-items-center pi pi-angle-double-left"
+          ></i>
+          <a routerLink="" class="p-1 font-semibold no-underline" style="color: #3399FF;"> Back </a>
+        </div>
+
+
       </div>
     </div>
 
@@ -131,15 +170,16 @@ export class TodoListDetailComponentComponent implements OnInit {
   }
 
   determineExecutionTime(item: TodoItem): string {
-    var milliSecondDiff = (item.comp_time==null?0:parseInt(item.comp_time+'')) - (item.cre_time==null?0:parseInt(item.cre_time+''));
-    var secondDiff = Math.floor(milliSecondDiff / 1000) ;
+    var milliSecondDiff =
+      (item.comp_time == null ? 0 : parseInt(item.comp_time + '')) -
+      (item.cre_time == null ? 0 : parseInt(item.cre_time + ''));
+    var secondDiff = Math.floor(milliSecondDiff / 1000);
     var second = secondDiff % 60;
     var minutes = Math.floor(secondDiff / 60);
     var hour = Math.floor(minutes / 60);
     var minute = Math.floor(minutes % 60);
 
-
-    return hour.toString()  + ":" + minute.toString() + ":" + minute.toString();
+    return hour.toString() + ':' + minute.toString() + ':' + minute.toString();
     // var timeStart = new Date('01/01/2007 ' + item.cre_time).getHours();
     // var timeEnd = new Date('01/01/2007 ' + item.comp_time).getHours();
 
@@ -164,34 +204,12 @@ export class TodoListDetailComponentComponent implements OnInit {
     return datetime;
   }
 
-  // @ViewChild('ts-details-more') detailMore : any;
-
-  // function hideTableDetail() {
-  //   blockTableDetail.classList.remove('show--table');
-  // }
-
-  // function showTableDetail() {
-  //   // alert("show")
-  //   blockTableDetail.classList.add('show--table');
-  // }
-
-  // //Hiện thị ra thời điểm tạo(dd/MM/YYYY), trạng thái (Hoàn thành, đang thực hiện), thời điểm hoàn thành(dd/MM/YYYY).
   showDetailTodolist() {
-    // Kỳ vọng thuộc tính display của table thành nome
-    // block--table
-    // [ngClass]="{ 'todo-complete': item.completed }"
-
-    // this.detailMore.addEventListener( )
-    // console.log('showDetailTodolist');
-
-    // this.isShowDetail = !this.isShowDetail;
-
     this.router.navigate(['']);
   }
 
-
-  showDetailTodoItem(item: TodoItem){
-    const index = this.todoList.indexOf(item)
+  showDetailTodoItem(item: TodoItem) {
+    const index = this.todoList.indexOf(item);
     this.router.navigate(['table-detail/' + index.toString()]);
   }
 }

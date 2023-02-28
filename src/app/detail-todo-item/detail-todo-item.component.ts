@@ -6,8 +6,6 @@ import { TodoItem } from '../interfaces/todo-item';
 @Component({
   selector: 'app-detail-todo-item',
   template: `
-
-
     <div class="block-detail-todo-item">
       <h2>Infomation detail todo:</h2>
       <ul>
@@ -33,10 +31,20 @@ import { TodoItem } from '../interfaces/todo-item';
           {{ isCompleteTime(item) ? determineExecutionTime(item) : '---' }}
         </li>
       </ul>
-      <a class="back--button" (click)="showDetailTodolist()"> << Back </a>
+      <!-- <a class="back--button" (click)="showDetailTodolist()"> << Back </a> -->
+
+
+      <div
+        class="flex align-item-center justify-content-start flex-direction-row text-sm font-italic back--button "
+      >
+        <i
+          class="flex justify-content-center align-items-center pi pi-angle-double-left" style=" font-weight: 00"
+        ></i>
+        <a routerLink="" class="p-1 font-semibold no-underline" style="color: #3399FF;">
+          Back
+        </a>
+      </div>
     </div>
-
-
   `,
   styleUrls: ['./detail-todo-item.component.scss'],
 })
@@ -103,7 +111,6 @@ export class DetailTodoItemComponent implements OnInit {
   }
 
   showDetailTodolist() {
-
     this.router.navigate(['table-detail']);
   }
 }

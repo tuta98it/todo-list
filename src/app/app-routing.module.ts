@@ -17,17 +17,19 @@ export const appRoutes: Routes = [
   //   ]
   // },
   {
-    path: '', component: ListManagerComponent
+    path: '',
+    component: ListManagerComponent,
   },
 
   {
-    path: 'table-detail', component: TodoListDetailComponentComponent
+    path: 'table-detail',
+    component: TodoListDetailComponentComponent,
   },
 
   {
-    path: 'table-detail/:id', component: DetailTodoItemComponent
+    path: 'table-detail/:id',
+    component: DetailTodoItemComponent,
   },
-
 ];
 
 @NgModule({

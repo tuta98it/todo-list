@@ -23,6 +23,11 @@
 
 }
 
+.todo-app ul{
+  margin: 0;
+  margin-top: 2px;
+}
+
 
 .block-button-all {
   display: flex;
@@ -123,10 +128,6 @@
 }
 
 .details-more--button {
-  padding: 8px;
-  text-align: end;
-  margin-bottom: 10px;
-  font-size: 14px;
   color: #3399FF;
 }
 

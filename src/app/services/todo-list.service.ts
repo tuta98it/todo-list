@@ -60,11 +60,11 @@ export class TodoListService {
     // this.todoList[index] = item;
 
     for (let index in this.todoList) {
-      var changes = {}
+      var changes = {};
       if (this.isSelect) {
         changes = { completed: this.isSelect, comp_time: Date.now() };
         this.todoList[index] = { ...this.todoList[index], ...changes };
-      }else{
+      } else {
         changes = { completed: this.isSelect, comp_time: null };
         this.todoList[index] = { ...this.todoList[index], ...changes };
       }
@@ -73,17 +73,13 @@ export class TodoListService {
     this.saveList();
   }
 
-
-
-
   deleteItem(item: any): void {
     const index = this.todoList.indexOf(item);
     this.todoList.splice(index, 1);
     this.saveList();
   }
 
-
-  removeAllTodo(){
+  removeAllTodo() {
     // console.log('removeAllTodo()');
     //console.log(this.todoList);
     //this.todoList.length = 0;
@@ -93,7 +89,6 @@ export class TodoListService {
     console.log(this.todoList);
     this.saveList();
   }
-
 
   getTodoList(): TodoItem[] {
     return this.todoList;

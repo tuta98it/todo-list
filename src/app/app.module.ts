@@ -11,6 +11,8 @@ import { TodoListDetailComponentComponent } from './todo-list-detail-component/t
 import { AppRoutingModule } from './app-routing.module';
 import { FormsModule } from '@angular/forms';
 import { DetailTodoItemComponent } from './detail-todo-item/detail-todo-item.component';
+import {ChipsModule} from 'primeng/chips';
+
 
 @NgModule({
   declarations: [
@@ -24,7 +26,8 @@ import { DetailTodoItemComponent } from './detail-todo-item/detail-todo-item.com
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    ChipsModule
   ],
   providers: [TodoListService, StorageService],
   bootstrap: [AppComponent]

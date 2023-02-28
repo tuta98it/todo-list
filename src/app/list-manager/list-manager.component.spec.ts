@@ -8,9 +8,8 @@ describe('ListManagerComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ListManagerComponent ]
-    })
-    .compileComponents();
+      declarations: [ListManagerComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(ListManagerComponent);
     component = fixture.componentInstance;

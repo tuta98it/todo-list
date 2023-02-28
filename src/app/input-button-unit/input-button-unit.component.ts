@@ -13,8 +13,15 @@ import { Component, OnInit, EventEmitter, Output } from '@angular/core';
     />
 
     <!-- Button save -->
-    <button class="btn" (click)="submitValue(inputElementRef.value)">
+    <!-- <button class="btn" (click)="submitValue(inputElementRef.value)">
       Set up to-do
+    </button> -->
+
+    <button  class="btn" (click)="submitValue(inputElementRef.value)">
+      <div class="flex flex-direction-row align-items-center">
+        <span>Set up to-do </span>
+        <i class="pi pi-plus ml-1 text-xs"></i>
+      </div>
     </button>
 
     <!-- <button (click)="changeTitle_ext(inputElementRef)">Save</button> -->

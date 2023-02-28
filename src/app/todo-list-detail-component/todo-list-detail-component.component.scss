@@ -23,6 +23,17 @@
 
 .block-detail {
   display: block;
+  position: relative;
+
+  // Animation
+  animation-name: show_table-detail;
+  animation-delay: 0s;
+  animation-direction: normal;
+  animation-duration: 1100ms;
+  animation-fill-mode: none;
+  animation-iteration-count: 1;
+  animation-play-state: running;
+  animation-timing-function: ease;
 }
 
 .block--table {
@@ -57,15 +68,7 @@
   margin: auto;
   // display: table-row;
 
-  // Animation
-  animation-name: show_table-detail;
-  animation-delay: 0s;
-  animation-direction: normal;
-  animation-duration: 1100ms;
-  animation-fill-mode: none;
-  animation-iteration-count: 1;
-  animation-play-state: running;
-  animation-timing-function: ease;
+
 
 }
 
@@ -86,8 +89,6 @@
     left: 0px;
   }
 }
-
-
 
 
 .tr-header_todolist--detail {
@@ -121,13 +122,10 @@
 
 
 
-
-
-
 .th_todolist--detail {
   width: calc(100% / 5);
   // box-shadow: 1px 2.5px 5px #888888;
-  box-shadow: 0px 0px 5px #888888;
+  // box-shadow: 0px 0px 5px #888888;
   background-color: #dddddd;
   font-weight: bold;
   opacity: 1;
@@ -173,14 +171,10 @@
 
 .back--button {
   position: absolute;
-  text-align: end;
-  left: 0px;
-  bottom: -56px;
-  padding: 8px;
-  margin-bottom: 10px;
+  // left: 180px;
+  left: 12%;
   font-size: 14px;
   color: #3399FF;
-
 }
 
 .back--button:hover {

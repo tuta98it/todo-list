@@ -29,9 +29,18 @@ import { DatePipe } from '@angular/common';
       <!-- Detail -->
 
       <div class="block-detail">
-        <a class="details-more--button" (click)="showDetailTodolist()">
+        <!-- <a class="details-more--button" (click)="showDetailTodolist()">
           Details more >>
-        </a>
+        </a> -->
+
+        <div class="flex align-item-center justify-content-end flex-direction-row text-sm font-italic details-more--button">
+          <a routerLink="table-detail" class="p-1 font-semibold no-underline"  style="color: #3399FF; ">
+            Details more
+          </a>
+          <i
+            class="flex justify-content-center align-items-center pi pi-angle-double-right"
+          ></i>
+        </div>
       </div>
       <!--  -->
 
@@ -137,8 +146,6 @@ export class ListManagerComponent implements OnInit {
 
     this.todoListServiceMain.checkAllTodo();
   }
-
-
 
   removeAll() {
     this.todoListServiceMain.removeAllTodo();

@@ -1,36 +1,40 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { TodoItem } from './interfaces/todo-item';
+import {AccordionModule} from 'primeng/accordion';
+import {MenuItem} from 'primeng/api';
+
+import { PrimeNGConfig } from 'primeng/api';
 
 
 @Component({
   selector: 'app-root',
   // templateUrl: './app.component.html',
   template: `
-    <!-- <h1 *ngIf="">Welcome to {{ title }}!</h1>
-    <app-input-button-unit (submit)="addItem($event)"></app-input-button-unit>
-    <app-input-button-unit (submit)="addItem($event)"></app-input-button-unit>
-    <app-input-button-unit (submit)="addItem($event)"></app-input-button-unit>
+    <!-- <p-chips [(ngModel)]="values"></p-chips> -->
 
-    <ul>
-      <li *ngFor="let todoItem of todoList">
-        {{ todoItem.title }}
-      </li>
-    </ul>
+    <!-- <h1 class="app-title">
+      Welcome to {{ title }}!
+    </h1> -->
 
-    <ul>
-      <li *ngFor="let todoItem of todoList">
-        <app-todo-item [item] = "todoItem"></app-todo-item>
-      </li>
-    </ul> -->
-
-    <h1 class="app-title">
+    <h1 class="text-900 text-xs font-bold text-6xl mb-4 text-center">
       Welcome to {{ title }}!
     </h1>
+
     <router-outlet></router-outlet>
   `,
   styleUrls: ['./app.component.scss'],
 })
-export class AppComponent {
+export class AppComponent  implements OnInit{
+  values='đasa'
+
+  constructor (private primengConfig: PrimeNGConfig) {
+
+  }
+
+
+  ngOnInit(): void {
+    this.primengConfig.ripple = true;
+  }
   title = 'todo-list';
   isShow = true;
 
