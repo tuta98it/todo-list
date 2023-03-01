@@ -12,6 +12,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { FormsModule } from '@angular/forms';
 import { DetailTodoItemComponent } from './detail-todo-item/detail-todo-item.component';
 import {ChipsModule} from 'primeng/chips';
+import { InputTextModule } from 'primeng/inputtext';
+import {ButtonModule} from 'primeng/button';
+import {CheckboxModule} from 'primeng/checkbox'
 
 
 @NgModule({
@@ -27,7 +30,10 @@ import {ChipsModule} from 'primeng/chips';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    ChipsModule
+    ChipsModule,
+    InputTextModule,
+    ButtonModule,
+    CheckboxModule
   ],
   providers: [TodoListService, StorageService],
   bootstrap: [AppComponent]

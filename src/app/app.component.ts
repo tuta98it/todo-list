@@ -10,11 +10,23 @@ import { PrimeNGConfig } from 'primeng/api';
   selector: 'app-root',
   // templateUrl: './app.component.html',
   template: `
-    <!-- <p-chips [(ngModel)]="values"></p-chips> -->
+    <!-- <p-chips [(ngModel)]="values"></p-chips>
 
-    <!-- <h1 class="app-title">
+    <h1 class="app-title">
       Welcome to {{ title }}!
-    </h1> -->
+    </h1>
+    <div class="card">
+			<h5>Severities</h5>
+			<div class="flex flex-wrap gap-2">
+				<button pButton pRipple type="button" label="Primary"></button>
+				<button pButton pRipple type="button" label="Secondary" class="p-button-secondary"></button>
+				<button pButton pRipple type="button" label="Success" class="p-button-success"></button>
+				<button pButton pRipple type="button" label="Info" class="p-button-info"></button>
+				<button pButton pRipple type="button" label="Warning" class="p-button-warning"></button>
+				<button pButton pRipple type="button" label="Help" class="p-button-help"></button>
+				<button pButton pRipple type="button" label="Danger" class="p-button-danger"></button>
+			</div>
+		</div> -->
 
     <h1 class="text-900 text-xs font-bold text-6xl mb-4 text-center">
       Welcome to {{ title }}!

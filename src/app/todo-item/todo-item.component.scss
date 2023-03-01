@@ -5,13 +5,12 @@
 
 .check-text {
   display: flex;
-
+  padding: 5px;
+  // background-color: #eeffef;
 }
 
 
-.button-edit .button-save{
-
-}
+.button-edit .button-save {}
 
 .todo-checkbox {
   flex-shrink: 0;
@@ -25,20 +24,34 @@
 
 .todo-title {
   // flex-grow: 1;
-  width: 160px;
+  // width: 160px;
+  width: 100%;
   padding: 0 0 0 6px;
   font-size: 15px;
   text-align: left;
-  border:none
+  border: none;
+  // word-wrap: break-word;
+  // word-break: break-all;
+  background: #fff;
 }
 
+.bg-done {
+  background-color: #eeffef;
+}
+
+.bg-edit {
+  background-color: #fff;
+}
 .todo-complete {
   text-decoration: line-through;
 }
 
 .wrap-check-text-edit-save {
+  padding: 5px;
   display: flex;
+  // background-color: #eeffef;
 }
+
 
 
 .wrap-check-text-edit-save-remove {
@@ -48,4 +61,9 @@
   line-height: 30px;
   display: flex;
   justify-content: space-between;
+}
+
+
+.bg-cl-gr{
+  background-color: lightseagreen;
 }

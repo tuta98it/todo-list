@@ -11,9 +11,31 @@ import { DatePipe } from '@angular/common';
       <app-input-button-unit (submit)="addItem($event)"></app-input-button-unit>
 
       <div class="block-button-all">
-        <button class="btn" (click)="selectAll()">Select All</button>
+        <!-- <button *ngIf="todoListMain.length != 0" class="btn" (click)="selectAll()">Select All</button> -->
+        <!-- <p-button label="All" icon="pi pi-check" class='bg'></p-button> -->
+        <button
+          *ngIf="todoListMain.length != 0"
+          (click)="selectAll()"
+          pButton
+          pRipple
+          type="button"
+          label="All"
+          icon="pi pi-check"
+          class="p-button-success"
+        ></button>
 
-        <button class="btn btn-red" (click)="removeAll()">Remove All</button>
+        <!-- <button *ngIf="todoListMain.length != 0" class="btn btn-red" (click)="removeAll()">Remove All</button> -->
+        <!-- <p-button label="All" icon="pi pi-check"></p-button> -->
+        <button
+          *ngIf="todoListMain.length != 0"
+          (click)="removeAll()"
+          pButton
+          pRipple
+          type="button"
+          label="All"
+          icon="pi pi-trash"
+          class="p-button-danger"
+        ></button>
       </div>
 
       <ul>
@@ -33,8 +55,14 @@ import { DatePipe } from '@angular/common';
           Details more >>
         </a> -->
 
-        <div class="flex align-item-center justify-content-end flex-direction-row text-sm font-italic details-more--button">
-          <a routerLink="table-detail" class="p-1 font-semibold no-underline"  style="color: #3399FF; ">
+        <div
+          class="flex align-item-center justify-content-end flex-direction-row text-sm font-italic details-more--button"
+        >
+          <a
+            routerLink="table-detail"
+            class="p-1 font-semibold no-underline"
+            style="color: #3399FF; "
+          >
             Details more
           </a>
           <i
@@ -70,21 +98,21 @@ export class ListManagerComponent implements OnInit {
   todoListMain: TodoItem[];
   todoListServiceMain: TodoListService;
 
-  todoListDetail: TodoItem[];
-  todoListServiceDetail: TodoListService;
+  // todoListDetail: TodoItem[];
+  // todoListServiceDetail: TodoListService;
 
   // router: any;
 
   constructor(
     private todoListServiceMain_t: TodoListService,
-    private todoListServiceDetail_t: TodoListService,
+    // private todoListServiceDetail_t: TodoListService,
     private router: Router
   ) {
     this.todoListServiceMain = todoListServiceMain_t;
     this.todoListMain = todoListServiceMain_t.getTodoList();
 
-    this.todoListServiceDetail = todoListServiceDetail_t;
-    this.todoListDetail = todoListServiceDetail_t.getTodoList();
+    // this.todoListServiceDetail = todoListServiceDetail_t;
+    // this.todoListDetail = todoListServiceDetail_t.getTodoList();
   }
 
   ngOnInit(): void {

@@ -8,22 +8,56 @@ import { TodoItem } from '../interfaces/todo-item';
     <div class="todo-item">
       <div class="wrap-check-text-edit-save-remove">
         <div class="wrap-check-text-edit-save">
-          <div class="check-text">
+          <div class="check-text" [ngClass]="{ 'bg-done': item.completed }">
             <!-- Check text -->
-            <input
+            <!-- item.completed? true : false -->
+
+            <p-checkbox
+              name="groupname"
+              value="val1"
+              [binary]="
+                !(item.completed != null
+                  ? item.completed == true
+                    ? true
+                    : false
+                  : false)
+              "
+              [(ngModel)]="selectedValues"
+              (onChange)="completeItem()"
+              inputId="binary"
+            ></p-checkbox>
+
+            <!-- <label
+              class="ml-2"
+              [ngClass]="{
+                'todo-complete': item.completed
+              }"
+              for=""
+              (keyup.Enter)="saveItem()"
+              [contentEditable]="isExpression"
+              >{{ item.title }}</label> -->
+
+            <!-- [ngClass]="{ 'todo-complete' : item.completed, }" -->
+            <!-- <input
               type="checkbox"
               class="todo-checkbox"
               (click)="completeItem()"
               [checked]="item.completed"
-            />
+            /> -->
 
             <!-- title doing -->
             <input
               [disabled]="isExpression"
-              class="todo-title"
+              class="todo-title ml-1"
               type="text"
-              [ngClass]="{ 'todo-complete': item.completed }"
+              [ngClass]="{
+                'todo-complete' : item.completed,
+                'bg-done': item.completed,
+                'bg-edit': !isEdit
+              }"
               [(ngModel)]="item.title"
+              (keyup.Enter)="saveItem()"
+
             />
           </div>
 
@@ -41,19 +75,20 @@ import { TodoItem } from '../interfaces/todo-item';
               </div>
             </button>
 
+            <!-- <p-button label="Small" icon="pi pi-check" styleClass="p-button-sm p-button-secondary"></p-button> -->
+
             <button *ngIf="!isExpression" class="btn ml-2" (click)="saveItem()">
               <div class="flex flex-direction-row align-items-center">
                 <i class="pi pi-check mr-1 text-xs"></i>
                 <span>Save</span>
               </div>
             </button>
+
+            <!-- <p-button label="Small" icon="pi pi-check" styleClass="p-button-sm"></p-button> -->
           </div>
         </div>
         <!-- Remove button -->
-        <button
-          class="btn btn-red"
-          (click)="removeItem()"
-        >
+        <button class="btn btn-red" (click)="removeItem()">
           <div class="flex flex-direction-row align-items-center">
             <i class="pi pi-trash mr-1 text-xs"></i>
             <span>Remove</span>
@@ -61,7 +96,7 @@ import { TodoItem } from '../interfaces/todo-item';
         </button>
         <!-- <button class="btn btn-red" (click)="removeItem()">Remove</button> -->
       </div>
-      <div class="flex align-items-center mt-1 text-xs">
+      <div class="flex align-items-center mt-1 ml-2 text-xs">
         <i class="pi pi-clock mr-2"></i>
         <span><b>Time to start:</b> {{ item.cre_time | date : 'medium' }}</span>
       </div>
@@ -73,6 +108,9 @@ export class TodoItemComponent implements OnInit {
   @Input()
   item!: TodoItem;
   isExpression = true;
+  isEdit = true;
+  b = true;
+  selectedValues: string[] = ['val1', 'val2'];
 
   @Output() remove: EventEmitter<TodoItem> = new EventEmitter<TodoItem>();
   @Output() update: EventEmitter<any> = new EventEmitter<any>();
@@ -85,6 +123,7 @@ export class TodoItemComponent implements OnInit {
 
   editItem() {
     this.isExpression = !this.isExpression;
+    this.isEdit = !this.isEdit;
   }
 
   saveItem() {
