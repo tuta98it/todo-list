@@ -3,126 +3,25 @@ import { TodoItem } from '../interfaces/todo-item';
 
 @Component({
   selector: 'app-input-button-unit',
-  template: `
-    <!-- <p>input-button-unit works!</p> -->
-
-    <div class="todo_setup--input">
-      <form action="">
-        <div class="todo-setup-content">
-          <div class="todo_setup-content--title">
-            <span class="p-float-label">
-              <input
-                id="float-input"
-                type="text"
-                pInputText
-                [(ngModel)]="title"
-              />
-              <label for="float-input">Username</label>
-            </span>
-          </div>
-
-          <div class="todo_setup-content--description">
-            <textarea rows="5" cols="30" pInputTextarea></textarea>
-          </div>
-        </div>
-
-        <div class="todo_setup-time">
-          <div class="todo_setup-time--start">
-            <div class="field col-12 md:col-4">
-              <label for="time">Todo start</label>
-              <p-calendar
-                [(ngModel)]="item.start_time"
-                [showTime]="true"
-                [showSeconds]="true"
-                [showIcon]="true"
-                inputId="start"
-              ></p-calendar>
-            </div>
-          </div>
-
-          <div class="todo_setup-time--deadline">
-            <div class="field col-12 md:col-4">
-              <label for="time">Todo deadline</label>
-              <p-calendar
-                [(ngModel)]="item.deadline_time"
-                [showTime]="true"
-                [showSeconds]="true"
-                [showIcon]="true"
-                inputId="deadline"
-              ></p-calendar>
-            </div>
-          </div>
-        </div>
-
-        <div class="todo_setup-priority">
-          <h5>Basic</h5>
-          <p-dropdown
-            [options]="listPriority"
-            [(ngModel)]="item.priority"
-            placeholder="Select the priority of the todo"
-            optionLabel="priority"
-            [showClear]="true"
-          ></p-dropdown>
-        </div>
-
-        <div class="todo_setup-btn--submit">
-          <p-button
-            label="Submit"
-            icon="pi pi-check"
-            iconPos="right"
-            class=""
-            (click)="submitValue()"
-          ></p-button>
-        </div>
-      </form>
-    </div>
-    <!-- <span class="p-float-label">
-      <input
-        id="float-input"
-        class=""
-        style="width: 200%"
-        #inputElementRef
-        type="text"
-        [(ngModel)]="title"
-        (keyup.enter)="submitValueKeyEnter($event)"
-        pInputText
-      />
-      <label for="float-input" class="text-sm">Title</label>
-    </span> -->
-
-    <!-- <input
-      class="todo-input"
-      #inputElementRef
-      type="text"
-      [value]="title"
-      (keyup.enter)="submitValueKeyEnter($event)"
-    /> -->
-
-    <!-- Button save -->
-    <!-- <button class="btn" (click)="submitValue(inputElementRef.value)">
-      Set up to-do
-    </button> -->
-
-    <!-- <button class="btn" (click)="submitValue(inputElementRef.value)">
-      <div class="flex flex-direction-row align-items-center">
-        <span>Set up to-do </span>
-        <i class="pi pi-plus ml-1 text-xs"></i>
-      </div>
-    </button> -->
-
-    <!-- <button (click)="changeTitle_ext(inputElementRef)">Save</button> -->
-    <!-- <button>Save</button> -->
-    <!-- (keyup.enter)="submitValue($event.target.value)" -->
-  `,
+  templateUrl:  './input-button-unit.component.html',
   styleUrls: ['./input-button-unit.component.scss'],
 })
 export class InputButtonUnitComponent implements OnInit {
   title: string;
   item: TodoItem;
   listPriority: string[];
+
+
+
+  // Date
+  value: Date;
+  minDate?: Date;
+  maxDate?: Date;
+  invalidDates?: Array<Date>;
   @Output() submit: EventEmitter<TodoItem> = new EventEmitter<TodoItem>();
 
   constructor() {
+    this.value  = new Date();
     this.title = '';
     this.item = {
       title: '',
@@ -137,7 +36,25 @@ export class InputButtonUnitComponent implements OnInit {
     this.listPriority = ['P1', 'P2', 'P3', 'P4'];
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    let today = new Date();
+    let month = today.getMonth();
+    let year = today.getFullYear();
+    let prevMonth = month === 0 ? 11 : month - 1;
+    let prevYear = prevMonth === 11 ? year - 1 : year;
+    let nextMonth = month === 11 ? 0 : month + 1;
+    let nextYear = nextMonth === 0 ? year + 1 : year;
+    this.minDate = new Date();
+    this.minDate.setMonth(prevMonth);
+    this.minDate.setFullYear(prevYear);
+    this.maxDate = new Date();
+    this.maxDate.setMonth(nextMonth);
+    this.maxDate.setFullYear(nextYear);
+
+    let invalidDate = new Date();
+    invalidDate.setDate(today.getDate() - 1);
+    this.invalidDates = [today, invalidDate];
+  }
 
   submitValue() {
     if (!this.isEmpty(this.title)) {

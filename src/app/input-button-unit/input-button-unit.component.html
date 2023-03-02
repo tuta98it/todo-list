@@ -1,15 +1,144 @@
-<!DOCTYPE html>
-<html lang="en">
+<div class="todo_setup--input">
+  <form action="">
+    <label for="id-todo_setup-content" class="block font-semibold opacity-80"
+      >Todo tile content</label
+    >
+    <div class="todo_setup-content" id="id-todo_setup-content">
+      <div class="todo_setup-content--title">
+        <div class="field">
+          <label for="todo-title" class="block">Todo tile</label>
+          <input
+            name="title"
+            style="width: -webkit-fill-available"
+            id="todo-title"
+            type="text"
+            aria-describedby="todo-title-help"
+            pInputText
+            [(ngModel)]="title"
+          />
+          <small id="todo-title-help" class="block"
+            >Enter your todo-title.</small
+          >
+        </div>
+        <!-- <span class="p-float-label">
+          <input id="todo-title" type="text" pInputText [(ngModel)]="title"/>
+          <label for="todo-title">Username</label>
+        </span> -->
+      </div>
 
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TODO LIST</title>
-</head>
+      <div class="todo_setup-content--description">
+        <span class="p-float-label">
+          <textarea
+            name="description"
+            style="width: -webkit-fill-available"
+            id="float-input-description"
+            rows="5"
+            pInputTextarea
+            [(ngModel)]="item.description"
+          ></textarea>
+          <label for="float-input-description">Description</label>
+        </span>
+      </div>
+    </div>
 
-<body>
+    <label
+      for="id-todo_setup-time"
+      class="block font-semibold opacity-80"
+      style="margin-top: 20px"
+      >Todo setup time</label
+    >
+    <div class="todo_setup-time flex flex-row" id="id-todo_setup-time">
 
-</body>
+      <div class="todo_setup-time--start  mt-2">
+        <div class="flex flex-column">
+          <label for="start" class="mb-2">Todo start:</label>
+          <p-calendar
+            name="start"
+            [(ngModel)]="item.start_time"
+            [showTime]="true"
+            [showSeconds]="true"
+            [showIcon]="true"
 
-</html>
+            inputId="start"
+
+          ></p-calendar>
+        </div>
+        <!-- <p-calendar [(ngModel)]="value"></p-calendar> -->
+      </div>
+
+      <div class="todo_setup-time--deadline mt-2 ml-2">
+        <div class="flex flex-column">
+          <label for="deadline" class="mb-2">Todo deadline:</label>
+          <p-calendar
+            name="deadline"
+            [(ngModel)]="item.deadline_time"
+            [showTime]="true"
+            [showSeconds]="true"
+            [showIcon]="true"
+
+            inputId="deadline"
+
+          ></p-calendar>
+        </div>
+      </div>
+    </div>
+
+    <div class="todo_setup-priority">
+      <!-- <h5>Basic</h5>
+      <p-dropdown
+        [options]="listPriority"
+        [(ngModel)]="item.priority"
+        placeholder="Select the priority of the todo"
+        optionLabel="priority"
+        [showClear]="true"
+      ></p-dropdown> -->
+    </div>
+
+    <div class="todo_setup-btn--submit mt-4">
+      <p-button
+        label="Submit"
+        icon="pi pi-check"
+        iconPos="right"
+        class=""
+        (click)="submitValue()"
+      ></p-button>
+    </div>
+  </form>
+</div>
+<!-- <span class="p-float-label">
+  <input
+    id="float-input"
+    class=""
+    style="width: 200%"
+    #inputElementRef
+    type="text"
+    [(ngModel)]="title"
+    (keyup.enter)="submitValueKeyEnter($event)"
+    pInputText
+  />
+  <label for="float-input" class="text-sm">Title</label>
+</span> -->
+
+<!-- <input
+  class="todo-input"
+  #inputElementRef
+  type="text"
+  [value]="title"
+  (keyup.enter)="submitValueKeyEnter($event)"
+/> -->
+
+<!-- Button save -->
+<!-- <button class="btn" (click)="submitValue(inputElementRef.value)">
+  Set up to-do
+</button> -->
+
+<!-- <button class="btn" (click)="submitValue(inputElementRef.value)">
+  <div class="flex flex-direction-row align-items-center">
+    <span>Set up to-do </span>
+    <i class="pi pi-plus ml-1 text-xs"></i>
+  </div>
+</button> -->
+
+<!-- <button (click)="changeTitle_ext(inputElementRef)">Save</button> -->
+<!-- <button>Save</button> -->
+<!-- (keyup.enter)="submitValue($event.target.value)" -->

@@ -14,13 +14,31 @@
   flex-grow: 1;
 }
 
+.ml-10{
+  margin-left: 10px;
+}
+
+.m-5{
+  margin: 5px;
+}
+
 .todo_setup--input {
   width: -webkit-fill-available;
 }
 
+
+.todo_setup-time,
+.todo_setup-content {
+  border: 1px solid #e6e6e6;
+  border-radius: 5px;
+  padding: 5px;
+
+}
 .todo_setup-content--title {}
 
-.todo_setup-content--description {}
+.todo_setup-content--description {
+  margin-top: 30px;
+}
 
 .todo_setup-time {}
 
@@ -30,4 +48,6 @@
 
 .todo_setup-priority {}
 
-.todo_setup-btn--submit {}
+.todo_setup-btn--submit {
+  float: right;
+}

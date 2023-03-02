@@ -2,9 +2,9 @@ export interface TodoItem {
   title: string;
   description?: string;
   completed?: boolean;
-  cre_time?:number;
-  start_time?:number;
-  deadline_time?:number;
-  comp_time?:number;
+  cre_time?:Date;
+  start_time?:Date;
+  deadline_time?:Date;
+  comp_time?:Date;
   priority?:string;
 }

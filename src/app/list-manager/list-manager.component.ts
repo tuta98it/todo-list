@@ -128,7 +128,7 @@ export class ListManagerComponent implements OnInit {
       title: item.title,
       description: item.description,
       completed: item.completed,
-      cre_time: Date.now(),
+      cre_time: new Date(),
       start_time: item.start_time,
       deadline_time: item.deadline_time,
       comp_time: item.comp_time,

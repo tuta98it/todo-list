@@ -18,7 +18,8 @@ import {CheckboxModule} from 'primeng/checkbox'
 import {CalendarModule} from 'primeng/calendar'
 import {InputTextareaModule} from 'primeng/inputtextarea';
 import {DropdownModule} from 'primeng/dropdown';
-
+import {PanelModule} from 'primeng/panel';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 @NgModule({
   declarations: [
     AppComponent,
@@ -38,7 +39,9 @@ import {DropdownModule} from 'primeng/dropdown';
     CheckboxModule,
     CalendarModule,
     InputTextareaModule,
-    DropdownModule
+    DropdownModule,
+    PanelModule,
+    BrowserAnimationsModule
   ],
   providers: [TodoListService, StorageService],
   bootstrap: [AppComponent]
