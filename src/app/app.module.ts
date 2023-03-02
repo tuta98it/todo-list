@@ -15,7 +15,9 @@ import {ChipsModule} from 'primeng/chips';
 import { InputTextModule } from 'primeng/inputtext';
 import {ButtonModule} from 'primeng/button';
 import {CheckboxModule} from 'primeng/checkbox'
-
+import {CalendarModule} from 'primeng/calendar'
+import {InputTextareaModule} from 'primeng/inputtextarea';
+import {DropdownModule} from 'primeng/dropdown';
 
 @NgModule({
   declarations: [
@@ -33,7 +35,10 @@ import {CheckboxModule} from 'primeng/checkbox'
     ChipsModule,
     InputTextModule,
     ButtonModule,
-    CheckboxModule
+    CheckboxModule,
+    CalendarModule,
+    InputTextareaModule,
+    DropdownModule
   ],
   providers: [TodoListService, StorageService],
   bootstrap: [AppComponent]
