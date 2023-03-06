@@ -118,19 +118,16 @@
         *ngIf="!this.input_form.value.fm_btn_submit"
         pButton
         pRipple
-
         label="Save"
         icon="pi pi-check"
         iconPos="right"
         class="p-button-success"
-
         (click)="saveValue()"
       ></button>
     </div>
   </form>
-  {{ input_form.value | json }}
-
-  <button type="button" (click)="input_form.reset()">Rest</button>
+  <!-- {{ input_form.value | json }}
+  <button type="button" (click)="input_form.reset()">Rest</button> -->
 </div>
 <!-- <span class="p-float-label">
   <input
