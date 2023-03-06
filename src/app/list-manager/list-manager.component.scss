@@ -1,7 +1,7 @@
 .todo-app {
   // list-style-type: none;
   position: relative;
-  width: 600px;
+  width: 80%;
   padding: 30px 30px 15px;
   background: white;
   border: 1px solid;
@@ -23,6 +23,17 @@
 
 }
 
+.block-input {
+  width: 60%;
+  padding: 0 10px;
+}
+
+.block-detail {
+  width: 40%;
+  padding: 0 10px 0 15px;
+}
+
+
 .todo-app ul{
   margin: 0;
   margin-top: 2px;
@@ -32,7 +43,7 @@
 .block-button-all {
   display: flex;
   justify-content: space-between;
-  margin-top: 15px;
+  margin-top: 0px;
 }
 
 .btn {
@@ -123,9 +134,6 @@
   align-items: center;
 }
 
-.block-detail {
-  display: grid;
-}
 
 .details-more--button {
   color: #3399FF;

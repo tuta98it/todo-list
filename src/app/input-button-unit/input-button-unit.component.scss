@@ -46,8 +46,13 @@
 
 .todo_setup-time--deadline {}
 
-.todo_setup-priority {}
+.todo_setup-priority {
+  padding: 5px;
+  border: 1px solid #e6e6e6;
+  border-radius: 5px;
+}
 
-.todo_setup-btn--submit {
-  float: right;
+.todo_setup-btn {
+  display: flex;
+  justify-content: space-between;
 }

@@ -67,7 +67,7 @@
 .table_todolist--detail {
   position: relative;
   text-align: center;
-  width: 75%;
+  width: 80%;
   border-collapse: collapse;
   margin: auto;
   // display: table-row;
@@ -127,7 +127,8 @@
 
 
 .th_todolist--detail {
-  width: calc(100% / 5);
+  // Width colums title table detail
+  width: calc(100% / 6);
   // box-shadow: 1px 2.5px 5px #888888;
   // box-shadow: 0px 0px 5px #888888;
   background-color: #dddddd;
@@ -137,7 +138,8 @@
 }
 
 .td_todolist--detail {
-  width: calc(100% / 5);
+  // Width colums component table detail
+  width: calc(100% / 6);
   letter-spacing: 0.5px;
 }
 

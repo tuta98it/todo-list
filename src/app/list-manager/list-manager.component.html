@@ -1,0 +1,73 @@
+<div *ngIf="isShowTodoList" class="flex flex-row todo-app">
+  <!-- [(input_isExpression)]="isExpression" -->
+  <div class="block-input">
+    <app-input-button-unit
+      [(input_form)]="form"
+      [input_item]="manager_item"
+      (submit)="addItem($event)"
+      (update)="updateItem($event.item, $event.changes)"
+    ></app-input-button-unit>
+  </div>
+
+  <div class="block-detail">
+    <!-- Button all -->
+    <div class="block-button-all">
+      <!-- <button *ngIf="todoListMain.length != 0" class="btn" (click)="selectAll()">Select All</button> -->
+      <!-- <p-button label="All" icon="pi pi-check" class='bg'></p-button> -->
+      <button
+        *ngIf="todoListMain.length != 0"
+        (click)="selectAll()"
+        pButton
+        pRipple
+        type="button"
+        label="All"
+        icon="pi pi-check"
+        class="p-button-success"
+      ></button>
+
+      <!-- <button *ngIf="todoListMain.length != 0" class="btn btn-red" (click)="removeAll()">Remove All</button> -->
+      <!-- <p-button label="All" icon="pi pi-check"></p-button> -->
+      <button
+        *ngIf="todoListMain.length != 0"
+        (click)="removeAll()"
+        pButton
+        pRipple
+        type="button"
+        label="All"
+        icon="pi pi-trash"
+        class="p-button-danger"
+      ></button>
+    </div>
+
+    <!-- List to-do -->
+    <ul>
+      <li *ngFor="let todoItem of todoListMain">
+        <app-todo-item
+          [todo_isEdit]="isEdit"
+          [todo_form]="form"
+          [item]="todoItem"
+          [(todo_item)]="manager_item"
+          (remove)="removeItem($event)"
+          (update)="updateItem($event.item, $event.changes)"
+        ></app-todo-item>
+      </li>
+    </ul>
+
+    <!-- Detail button-->
+    <div
+      class="flex align-item-center justify-content-end flex-direction-row text-sm font-italic details-more--button"
+    >
+      <a
+        routerLink="table-detail"
+        class="p-1 font-semibold no-underline"
+        style="color: #3399ff"
+      >
+        Details more
+      </a>
+      <i
+        class="flex justify-content-center align-items-center pi pi-angle-double-right"
+      ></i>
+    </div>
+  </div>
+  <!-- <router-outlet></router-outlet> -->
+</div>

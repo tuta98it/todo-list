@@ -1,39 +1,79 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
 import { TodoItem } from '../interfaces/todo-item';
-
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Priority } from '../interfaces/priority';
+import { TodoItemComponent } from '../todo-item/todo-item.component';
 @Component({
   selector: 'app-input-button-unit',
-  templateUrl:  './input-button-unit.component.html',
+  templateUrl: './input-button-unit.component.html',
   styleUrls: ['./input-button-unit.component.scss'],
 })
 export class InputButtonUnitComponent implements OnInit {
   title: string;
-  item: TodoItem;
-  listPriority: string[];
+  @Input() input_item: any;
 
+  listPriority: Priority[];
 
+  // isExpression
+  // @Input() input_isExpression!: boolean;
+  //  @Output() input_isExpressionChange: EventEmitter<any> =
+  //   new EventEmitter<any>();
+  // Điều khiển giao diện nút submit và save
+  input_isExpression = true;
 
   // Date
   value: Date;
   minDate?: Date;
   maxDate?: Date;
   invalidDates?: Array<Date>;
-  @Output() submit: EventEmitter<TodoItem> = new EventEmitter<TodoItem>();
 
-  constructor() {
-    this.value  = new Date();
+  // Form
+  @Input() input_form!: FormGroup;
+  @Output() input_formChange: EventEmitter<any> = new EventEmitter<any>();
+
+  @Output() submit: EventEmitter<any> = new EventEmitter<any>();
+  @Output() update: EventEmitter<any> = new EventEmitter<any>();
+
+  // static form: FormGroup<any>;
+  // TodoItemComponent: any;
+
+  constructor(fb: FormBuilder) {
+    this.value = new Date();
     this.title = '';
-    this.item = {
-      title: '',
-      description: '',
-      completed: false,
-      cre_time: undefined,
-      start_time: undefined,
-      deadline_time: undefined,
-      comp_time: undefined,
-      priority: undefined,
-    };
-    this.listPriority = ['P1', 'P2', 'P3', 'P4'];
+    // this.item = {
+    //   title: '',
+    //   description: '',
+    //   completed: false,
+    //   cre_time: undefined,
+    //   start_time: undefined,
+    //   deadline_time: undefined,
+    //   comp_time: undefined,
+    //   priority: undefined,
+    // };
+    this.listPriority = [
+      {
+        name: 'Critical',
+        short_key: 'P1',
+        descripsion:
+          ' finish this task to unblock someone else, required to be done before other things',
+      },
+      {
+        name: 'High',
+        short_key: 'P1',
+        descripsion: 'ordinary flow of work',
+      },
+      {
+        name: 'Medium',
+        short_key: 'P3',
+        descripsion: 'nice to have, but not required',
+      },
+      {
+        name: 'Low',
+        short_key: 'P4',
+        descripsion: 'informational only',
+      },
+    ];
+    // this.listPriority = [{name:'p1'}];
   }
 
   ngOnInit(): void {
@@ -57,22 +97,48 @@ export class InputButtonUnitComponent implements OnInit {
   }
 
   submitValue() {
-    if (!this.isEmpty(this.title)) {
-      this.item.title = this.title;
-      this.submit.emit(this.item);
-      this.title = '';
-      // console.log('inputElementRef.value = ' + inputElementRef.value)
+    // this.form.controls['fm_title'].setValue('Trần Anh Tú');
+    // var obj = this.form.value;
+
+    //Nạp dữ liệu xuống local store
+    if (this.input_form.value.fm_title != null) {
+      // this.item.title = this.title;
+      this.input_form.controls['fm_time_creation'].setValue(new Date());
+      this.submit.emit(this.input_form.value);
     }
+
+    //Xoá dữ liệu trên form
+    // this.input_form.reset();
+    this.resetForm();
   }
 
-  // submitValueKeyEnter(e: Event) {
-  //   var target = e.target as HTMLInputElement;
-  //   if (!this.isEmpty(target.value)) {
-  //     this.item.title = this.title;
-  //     this.submit.emit(this.item);
-  //     this.title = '';
-  //   }
-  // }
+  saveValue() {
+    console.log('this.input_item.fm_title:' + this.input_item.fm_title);
+
+    //Lưu dữ liệu lại story
+    this.update.emit({
+      item: this.input_item,
+      changes: this.input_form.value,
+    });
+
+    // Đổi trạng thái nút Save -> submit trên giao diện Input
+    this.input_form.controls['fm_btn_submit'].setValue(
+      !this.input_form.value.fm_btn_submit
+    );
+
+    //Xoá dữ liệu trên form
+    this.resetForm();
+  }
+
+  resetForm() {
+    this.input_form.controls['fm_title'].setValue(null);
+    this.input_form.controls['fm_description'].setValue(null);
+    this.input_form.controls['fm_time_start'].setValue(null);
+    this.input_form.controls['fm_time_deadline'].setValue(null);
+    this.input_form.controls['fm_priority'].setValue(null);
+  }
+
+
 
   isEmpty(str: string) {
     return !str || str.length === 0;

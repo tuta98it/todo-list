@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TodoListService } from '../services/todo-list.service';
-import { TodoItem } from '../interfaces/todo-item';
 
 @Component({
   selector: 'app-detail-todo-item',
@@ -9,38 +8,52 @@ import { TodoItem } from '../interfaces/todo-item';
     <div class="block-detail-todo-item">
       <h2>Infomation detail todo:</h2>
       <ul>
-        <li class="text-item"><b>Work to do:</b> {{ item.title }}</li>
+        <li class="text-item"><b>Work to do:</b> {{ item.fm_title }}</li>
 
         <li class="text-item">
-          <b>Status:</b> {{ setStatus(item.completed) }}
+          <b>Status:</b> {{ setStatus(item.fm_status_completed) }}
         </li>
 
+        <!-- Creation time -->
         <li class="text-item">
-          <b>Creation time: </b>{{ item.cre_time | date : 'medium' }}
+          <b>Creation time: </b>{{ item.fm_time_creation? (item.fm_time_creation | date : 'medium') : '---' }}
         </li>
 
+        <!-- Start time -->
+        <li class="text-item">
+          <b>Start time: </b>{{item.fm_time_start? (item.fm_time_start | date : 'medium') : '---' }}
+        </li>
+
+        <!-- Component time: -->
         <li class="text-item">
           <b>Component time:</b>
           {{
-            isCompleteTime(item) ? (item.comp_time | date : 'medium') : '---'
+            item.fm_time_completed
+              ? (item.fm_time_completed | date : 'medium')
+              : '---'
           }}
         </li>
 
+        <!--  Implementation time -->
         <li class="text-item">
           <b>Implementation time:</b>
-          {{ isCompleteTime(item) ? determineExecutionTime(item) : '---' }}
+          {{ item.fm_time_completed ? determineExecutionTime(item) : '---' }}
         </li>
       </ul>
       <!-- <a class="back--button" (click)="showDetailTodolist()"> << Back </a> -->
-
 
       <div
         class="flex align-item-center justify-content-start flex-direction-row text-sm font-italic back--button "
       >
         <i
-          class="flex justify-content-center align-items-center pi pi-angle-double-left" style=" font-weight: 00"
+          class="flex justify-content-center align-items-center pi pi-angle-double-left"
+          style=" font-weight: 00"
         ></i>
-        <a routerLink="" class="p-1 font-semibold no-underline" style="color: #3399FF;">
+        <a
+          routerLink=""
+          class="p-1 font-semibold no-underline"
+          style="color: #3399FF;"
+        >
           Back
         </a>
       </div>
@@ -51,9 +64,9 @@ import { TodoItem } from '../interfaces/todo-item';
 export class DetailTodoItemComponent implements OnInit {
   private sub: any;
   id!: number;
-  todoList: TodoItem[];
+  todoList: any[];
   todoListService: TodoListService;
-  item!: TodoItem;
+  item!: any;
   constructor(
     private route: ActivatedRoute,
     private todoListService_t: TodoListService,
@@ -75,22 +88,26 @@ export class DetailTodoItemComponent implements OnInit {
     return status ? 'Complete!' : 'Processing...';
   }
 
-  // Thiết lập thời gian hoàn thành một đầu việc
-  isCompleteTime(item: TodoItem) {
-    return typeof item.comp_time == 'number';
-  }
+  determineExecutionTime(item: any): string {
+    // var milliSecondDiff =
+    //   (item.fm_time_completed == null ? 0 : parseInt(item.comp_time)) -
+    //   (item.fm_time_start == null ? 0 : parseInt(item.cre_time));
+    var time = '---';
+    if (item.fm_time_completed && item.fm_time_start) {
+      var milliSecondDiff =
+        new Date(item.fm_time_completed).getTime() -
+        new Date(item.fm_time_start).getTime();
+      // console.log('milliSecondDiff : ' + milliSecondDiff);
 
-  determineExecutionTime(item: TodoItem): string {
-    var milliSecondDiff =
-      (item.comp_time == null ? 0 : parseInt(item.comp_time + '')) -
-      (item.cre_time == null ? 0 : parseInt(item.cre_time + ''));
-    var secondDiff = Math.floor(milliSecondDiff / 1000);
-    var second = secondDiff % 60;
-    var minutes = Math.floor(secondDiff / 60);
-    var hour = Math.floor(minutes / 60);
-    var minute = Math.floor(minutes % 60);
-
-    return hour.toString() + ':' + minute.toString() + ':' + minute.toString();
+      var secondDiff = Math.floor(milliSecondDiff / 1000);
+      var second = secondDiff % 60;
+      var minutes = Math.floor(secondDiff / 60);
+      var hour = Math.floor(minutes / 60);
+      var minute = Math.floor(minutes % 60);
+      time =
+        hour.toString() + ':' + minute.toString() + ':' + second.toString();
+    }
+    return time;
   }
   currentDate(): string {
     var currentdate = new Date();

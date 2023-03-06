@@ -26,8 +26,9 @@ export class TodoListService {
   //   { title: 'deploy app' },
   // ];
 
-  todoList: TodoItem[];
+  todoList: any[];
   isSelect = true;
+
   constructor(private storageService: StorageService) {
     this.todoList =
       storageService.getData(todoListStorageKey) || defaultTodoList;
@@ -37,7 +38,7 @@ export class TodoListService {
     this.storageService.setData(todoListStorageKey, this.todoList);
   }
 
-  addItem(item: TodoItem): void {
+  addItem(item: any): void {
     this.todoList.push(item);
     // this.todoList = [...this.todoList,item];
     this.saveList();

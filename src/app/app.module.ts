@@ -9,7 +9,7 @@ import { TodoListService } from './services/todo-list.service';
 import { StorageService } from './services/storage.service';
 import { TodoListDetailComponentComponent } from './todo-list-detail-component/todo-list-detail-component.component';
 import { AppRoutingModule } from './app-routing.module';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DetailTodoItemComponent } from './detail-todo-item/detail-todo-item.component';
 import {ChipsModule} from 'primeng/chips';
 import { InputTextModule } from 'primeng/inputtext';
@@ -20,6 +20,7 @@ import {InputTextareaModule} from 'primeng/inputtextarea';
 import {DropdownModule} from 'primeng/dropdown';
 import {PanelModule} from 'primeng/panel';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -41,7 +42,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     InputTextareaModule,
     DropdownModule,
     PanelModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    ReactiveFormsModule
   ],
   providers: [TodoListService, StorageService],
   bootstrap: [AppComponent]

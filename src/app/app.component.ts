@@ -4,7 +4,7 @@ import {AccordionModule} from 'primeng/accordion';
 import {MenuItem} from 'primeng/api';
 
 import { PrimeNGConfig } from 'primeng/api';
-
+import {FormGroup , FormBuilder ,Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-root',

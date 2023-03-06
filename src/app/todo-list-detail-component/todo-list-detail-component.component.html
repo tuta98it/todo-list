@@ -1,0 +1,148 @@
+<div class="block-detail">
+  <!-- <a class="details-more js-details-more" (click)="showDetailTodolist()">
+    Details more >>
+  </a> -->
+  <div *ngIf="isShowDetail" class="block--table">
+    <table class="table_todolist--detail">
+      <tr class="tr-header_todolist--detail alpha-1">
+        <!-- Work to do -->
+        <th class="th_todolist--detail">
+          <div class="flex align-items-center justify-content-center">
+            <i class="pi pi-list mr-2"></i>
+            <span> Work to do </span>
+          </div>
+        </th>
+
+        <!-- Start time -->
+        <th class="th_todolist--detail">
+          <div class="flex align-items-center justify-content-center">
+            <i class="pi pi-clock mr-2"></i>
+            <span> Start time </span>
+          </div>
+        </th>
+
+        <!-- Dealine time -->
+        <th class="th_todolist--detail">
+          <div class="flex align-items-center justify-content-center">
+            <i class="pi pi-calendar-times mr-2"></i>
+            <span> Dealine time </span>
+          </div>
+        </th>
+
+        <!-- Complete time -->
+        <th class="th_todolist--detail">
+          <div class="flex align-items-center justify-content-center">
+            <i class="pi pi-stopwatch mr-2"></i>
+            <span> Complete time </span>
+          </div>
+        </th>
+
+        <!-- Implementation time  -->
+        <th class="th_todolist--detail">
+          <div class="flex align-items-center justify-content-center">
+            <i class="pi pi-hourglass mr-2"></i>
+            <span> Implementation time </span>
+          </div>
+        </th>
+        <!-- Status anh comment -->
+        <th class="th_todolist--detail">
+          <div class="flex align-items-center justify-content-center">
+            <i class="pi pi-verified mr-2"></i>
+            <span> Status and comment</span>
+          </div>
+        </th>
+      </tr>
+
+      <tr
+        class="tr_todolist--detail"
+        *ngFor="let todoItem of todoList"
+        (click)="showDetailTodoItem(todoItem)"
+      >
+        <!-- Title todo -->
+        <td class="td_todolist--detail">{{ todoItem.fm_title }}</td>
+
+        <!-- Time to start work -->
+        <td class="td_todolist--detail">
+          {{
+            todoItem.fm_time_start
+              ? (todoItem.fm_time_start | date : "medium")
+              : "---"
+          }}
+        </td>
+
+        <!-- Time to deadline work -->
+        <td class="td_todolist--detail">
+          {{
+            todoItem.fm_time_deadline
+              ? (todoItem.fm_time_deadline | date : "medium")
+              : "---"
+          }}
+        </td>
+
+        <!-- Time to complete work -->
+        <td class="td_todolist--detail">
+          {{
+            todoItem.fm_time_completed
+              ? (todoItem.fm_time_completed | date : "medium")
+              : "---"
+          }}
+        </td>
+
+        <!-- Time period to perform the work -->
+        <td class="td_todolist--detail">
+          {{
+            todoItem.fm_time_completed
+              ? determineExecutionTime(todoItem)
+              : "---"
+          }}
+        </td>
+
+        <!-- Status todo -->
+        <td class="td_todolist--detail">
+          <div
+            class="border-status"
+            [ngClass]="{
+              'status-complete': todoItem.fm_status_completed,
+              'status-proses': !todoItem.fm_status_completed
+            }"
+          >
+            {{ setStatus(todoItem) }}
+          </div>
+        </td>
+      </tr>
+    </table>
+
+    <div
+      class="flex align-item-center justify-content-start flex-direction-row text-sm font-italic back--button"
+    >
+      <i
+        class="flex justify-content-center align-items-center pi pi-angle-double-left"
+      ></i>
+      <a
+        routerLink=""
+        class="p-1 font-semibold no-underline"
+        style="color: #3399ff"
+      >
+        Back
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- <script>
+  const blockTableDetail = document.querySelector('.js-block--table');
+  const detailMore = document.querySelector('js-details-more');
+  // console.log("detail:" + detailMore);
+
+
+  function hideTableDetail() {
+    blockTableDetail.classList.remove('show--table');
+  }
+
+  function showTableDetail() {
+    // alert("show")
+    blockTableDetail.classList.add('show--table');
+  }
+
+  detailMore.addEventListener('click', showTableDetail);
+</script> -->

@@ -1,22 +1,26 @@
 <div class="todo_setup--input">
-  <form action="">
+  <!-- [(ngModel)]="title" -->
+  <!-- [(ngModel)]="item.description" -->
+  <!-- [(ngModel)]="item.start_time" -->
+  <!-- [(ngModel)]="item.deadline_time" -->
+  <!-- [(ngModel)]="item.priority" -->
+  <form [formGroup]="input_form">
     <label for="id-todo_setup-content" class="block font-semibold opacity-80"
       >Todo tile content</label
     >
     <div class="todo_setup-content" id="id-todo_setup-content">
       <div class="todo_setup-content--title">
         <div class="field">
-          <label for="todo-title" class="block">Todo tile</label>
+          <label for="id-todo-title" class="block">Todo tile</label>
           <input
-            name="title"
+            formControlName="fm_title"
             style="width: -webkit-fill-available"
-            id="todo-title"
+            id="id-todo-title"
             type="text"
-            aria-describedby="todo-title-help"
+            aria-describedby="id-todo-title-help"
             pInputText
-            [(ngModel)]="title"
           />
-          <small id="todo-title-help" class="block"
+          <small id="id-todo-title-help" class="block"
             >Enter your todo-title.</small
           >
         </div>
@@ -29,14 +33,13 @@
       <div class="todo_setup-content--description">
         <span class="p-float-label">
           <textarea
-            name="description"
+            formControlName="fm_description"
             style="width: -webkit-fill-available"
-            id="float-input-description"
+            id="id-float-input-description"
             rows="5"
             pInputTextarea
-            [(ngModel)]="item.description"
           ></textarea>
-          <label for="float-input-description">Description</label>
+          <label for="id-float-input-description">Description</label>
         </span>
       </div>
     </div>
@@ -48,19 +51,15 @@
       >Todo setup time</label
     >
     <div class="todo_setup-time flex flex-row" id="id-todo_setup-time">
-
-      <div class="todo_setup-time--start  mt-2">
+      <div class="todo_setup-time--start mt-2">
         <div class="flex flex-column">
           <label for="start" class="mb-2">Todo start:</label>
           <p-calendar
-            name="start"
-            [(ngModel)]="item.start_time"
+            formControlName="fm_time_start"
             [showTime]="true"
             [showSeconds]="true"
             [showIcon]="true"
-
             inputId="start"
-
           ></p-calendar>
         </div>
         <!-- <p-calendar [(ngModel)]="value"></p-calendar> -->
@@ -68,42 +67,70 @@
 
       <div class="todo_setup-time--deadline mt-2 ml-2">
         <div class="flex flex-column">
-          <label for="deadline" class="mb-2">Todo deadline:</label>
+          <label for="id_deadline" class="mb-2">Todo deadline:</label>
           <p-calendar
-            name="deadline"
-            [(ngModel)]="item.deadline_time"
+            formControlName="fm_time_deadline"
             [showTime]="true"
             [showSeconds]="true"
             [showIcon]="true"
-
-            inputId="deadline"
-
+            inputId="id_deadline"
           ></p-calendar>
         </div>
       </div>
     </div>
 
-    <div class="todo_setup-priority">
-      <!-- <h5>Basic</h5>
+    <div class="todo_setup-priority mt-4">
+      <label for="id_priority" class="mb-2">Priority:</label>
       <p-dropdown
+        formControlName="fm_priority"
         [options]="listPriority"
-        [(ngModel)]="item.priority"
         placeholder="Select the priority of the todo"
         optionLabel="priority"
+        optionLabel="name"
         [showClear]="true"
-      ></p-dropdown> -->
+        inputId="id_priority"
+        class="ml-2"
+      ></p-dropdown>
     </div>
 
-    <div class="todo_setup-btn--submit mt-4">
+    <div class="todo_setup-btn mt-4">
+      <button
+        pButton
+        pRipple
+        type="button"
+        label="Reset"
+        icon="pi pi-refresh"
+        iconPos="right"
+        class="p-button-secondary"
+        (click)="input_form.reset()"
+      ></button>
+
       <p-button
+        *ngIf="this.input_form.value.fm_btn_submit"
         label="Submit"
         icon="pi pi-check"
         iconPos="right"
         class=""
         (click)="submitValue()"
       ></p-button>
+
+      <button
+        *ngIf="!this.input_form.value.fm_btn_submit"
+        pButton
+        pRipple
+
+        label="Save"
+        icon="pi pi-check"
+        iconPos="right"
+        class="p-button-success"
+
+        (click)="saveValue()"
+      ></button>
     </div>
   </form>
+  {{ input_form.value | json }}
+
+  <button type="button" (click)="input_form.reset()">Rest</button>
 </div>
 <!-- <span class="p-float-label">
   <input

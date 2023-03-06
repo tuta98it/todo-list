@@ -3,85 +3,19 @@ import { TodoItem } from '../interfaces/todo-item';
 import { TodoListService } from '../services/todo-list.service';
 import { Router } from '@angular/router';
 import { DatePipe } from '@angular/common';
-
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 @Component({
   selector: 'app-list-manager',
-  template: `
-    <div *ngIf="isShowTodoList" class="todo-app">
-      <app-input-button-unit (submit)="addItem($event)"></app-input-button-unit>
-
-      <div class="block-button-all">
-        <!-- <button *ngIf="todoListMain.length != 0" class="btn" (click)="selectAll()">Select All</button> -->
-        <!-- <p-button label="All" icon="pi pi-check" class='bg'></p-button> -->
-        <button
-          *ngIf="todoListMain.length != 0"
-          (click)="selectAll()"
-          pButton
-          pRipple
-          type="button"
-          label="All"
-          icon="pi pi-check"
-          class="p-button-success"
-        ></button>
-
-        <!-- <button *ngIf="todoListMain.length != 0" class="btn btn-red" (click)="removeAll()">Remove All</button> -->
-        <!-- <p-button label="All" icon="pi pi-check"></p-button> -->
-        <button
-          *ngIf="todoListMain.length != 0"
-          (click)="removeAll()"
-          pButton
-          pRipple
-          type="button"
-          label="All"
-          icon="pi pi-trash"
-          class="p-button-danger"
-        ></button>
-      </div>
-
-      <ul>
-        <li *ngFor="let todoItem of todoListMain">
-          <app-todo-item
-            [item]="todoItem"
-            (remove)="removeItem($event)"
-            (update)="updateItem($event.item, $event.changes)"
-          ></app-todo-item>
-        </li>
-      </ul>
-
-      <!-- Detail -->
-
-      <div class="block-detail">
-        <!-- <a class="details-more--button" (click)="showDetailTodolist()">
-          Details more >>
-        </a> -->
-
-        <div
-          class="flex align-item-center justify-content-end flex-direction-row text-sm font-italic details-more--button"
-        >
-          <a
-            routerLink="table-detail"
-            class="p-1 font-semibold no-underline"
-            style="color: #3399FF; "
-          >
-            Details more
-          </a>
-          <i
-            class="flex justify-content-center align-items-center pi pi-angle-double-right"
-          ></i>
-        </div>
-      </div>
-      <!--  -->
-
-      <router-outlet></router-outlet>
-    </div>
-
-    <!-- <app-todo-list-detail-component  (hide)="hideTodoList()"></app-todo-list-detail-component> -->
-  `,
+  templateUrl: './list-manager.component.html',
   styleUrls: ['./list-manager.component.scss'],
 })
 export class ListManagerComponent implements OnInit {
   isShowTodoList = true;
+  isEdit = true;
 
+  isExpression = true;
+  // Form
+  public form: FormGroup;
   // todoList: TodoItem[] = [
   //   { title: 'install NodeJS' },
   //   { title: 'install Angular CLI' },
@@ -95,22 +29,39 @@ export class ListManagerComponent implements OnInit {
   //   todoListService.getTodoList();
   // }
 
+  // Biến quản lý dữ liệu từ local store
   todoListMain: TodoItem[];
   todoListServiceMain: TodoListService;
 
+
+  manager_item: any;
   // todoListDetail: TodoItem[];
   // todoListServiceDetail: TodoListService;
 
-  // router: any;
+
 
   constructor(
     private todoListServiceMain_t: TodoListService,
     // private todoListServiceDetail_t: TodoListService,
-    private router: Router
+    private router: Router,
+    fb: FormBuilder
   ) {
     this.todoListServiceMain = todoListServiceMain_t;
     this.todoListMain = todoListServiceMain_t.getTodoList();
 
+    //Form
+    this.form = fb.group({
+      fm_title: [null, Validators.required],
+      fm_status_completed: [false, Validators.required],
+      fm_description: [null, Validators.required],
+      fm_time_creation: [null, Validators.required],
+      fm_time_start: [null, Validators.required],
+      fm_time_deadline: [null, Validators.required],
+      fm_time_completed: [null, Validators.required],
+      fm_priority: [null, Validators.required],
+      fm_btn_reset: [null, Validators.required],
+      fm_btn_submit: [true, Validators.required],
+    });
     // this.todoListServiceDetail = todoListServiceDetail_t;
     // this.todoListDetail = todoListServiceDetail_t.getTodoList();
   }
@@ -123,17 +74,20 @@ export class ListManagerComponent implements OnInit {
     this.isShowTodoList = false;
   }
 
-  addItem(item: TodoItem): void {
-    this.todoListServiceMain.addItem({
-      title: item.title,
-      description: item.description,
-      completed: item.completed,
-      cre_time: new Date(),
-      start_time: item.start_time,
-      deadline_time: item.deadline_time,
-      comp_time: item.comp_time,
-      priority: item.priority
-    });
+  addItem(item: any): void {
+    this.todoListServiceMain.addItem(item);
+
+    // addItem(item: TodoItem): void {
+    //   this.todoListServiceMain.addItem({
+    //     title: item.title,
+    //     description: item.description,
+    //     completed: item.completed,
+    //     cre_time: new Date(),
+    //     start_time: item.start_time,
+    //     deadline_time: item.deadline_time,
+    //     comp_time: item.comp_time,
+    //     priority: item.priority
+    //   });
 
     // this.todoListServiceDetail.addItem({
     //   title: title,
