@@ -149,14 +149,16 @@
   background-color: #dddddd;
   font-weight: bold;
   opacity: 1;
+
   // background-color: red;
 
 }
 
 .border-status {
   display: inline-block;
+  max-width: 80%;
   text-align: center;
-  padding: 4px 12px;
+  padding: 4px 8px;
   margin: 10px 0px;
   border: 1px solid;
   border-color: #333;
