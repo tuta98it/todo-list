@@ -50,7 +50,7 @@ export class TodoListDetailComponentComponent implements OnInit {
   setStatus(item: any): string {
     var status: string;
     status = '';
-    console.log('item.fm_status_completed: ' +item.fm_status_completed);
+    console.log('item.fm_status_completed: ' + item.fm_status_completed);
     if (item.fm_status_completed) {
       status.concat('Complete!');
       var milliSecondDiff =
@@ -63,8 +63,8 @@ export class TodoListDetailComponentComponent implements OnInit {
       } else {
         status = 'Completed on schedule!';
       }
-    }else{
-      status = "Procseting ..."
+    } else {
+      status = 'Procseting ...';
     }
     return status;
   }
@@ -91,6 +91,21 @@ export class TodoListDetailComponentComponent implements OnInit {
         hour.toString() + ':' + minute.toString() + ':' + second.toString();
     }
     return time;
+  }
+
+  levelTodo(item: any): number {
+    var level = 0;
+    // console.log('item.fm_time_complete : ' + item.fm_time_complete);
+    // console.log('item.fm_time_start : ' + item.fm_time_start);
+    // console.log('item.fm_time_complete && item.fm_time_start = ', item.fm_time_complete && item.fm_time_start);
+    if (item.fm_time_completed && item.fm_time_start) {
+      var milliSecondDiff =
+        new Date(item.fm_time_completed).getTime() -
+        new Date(item.fm_time_deadline).getTime();
+      level = milliSecondDiff < 0 ? 1 : milliSecondDiff == 0 ? 2 : 3;
+    }
+    console.log('level ', level);
+    return level;
   }
 
   currentDate(): string {

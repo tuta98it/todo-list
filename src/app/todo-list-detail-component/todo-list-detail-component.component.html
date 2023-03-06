@@ -99,14 +99,28 @@
 
         <!-- Status todo -->
         <td class="td_todolist--detail">
-          <div
-            class="border-status"
-            [ngClass]="{
-              'status-complete': todoItem.fm_status_completed,
-              'status-proses': !todoItem.fm_status_completed
-            }"
-          >
-            {{ setStatus(todoItem) }}
+          <div class="flex align-items-center">
+            <div
+              class="border-status"
+              [ngClass]="{
+                'status-complete': todoItem.fm_status_completed,
+                'status-proses': !todoItem.fm_status_completed
+              }"
+            >
+              {{ setStatus(todoItem) }}
+            </div>
+            <i
+              *ngIf="todoItem.fm_status_completed"
+              [ngStyle]="{
+                color:
+                  this.levelTodo(todoItem) == 1
+                    ? '#fbd511'
+                    : this.levelTodo(todoItem) == 2
+                    ? '#aaaaaa'
+                    : '#c0a3a1'
+              }"
+              class="pi pi-thumbs-up-fill ml-2"
+            ></i>
           </div>
         </td>
       </tr>

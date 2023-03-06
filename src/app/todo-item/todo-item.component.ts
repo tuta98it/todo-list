@@ -8,7 +8,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
   selector: 'app-todo-item',
   template: `
     <div class="todo-item">
-      <div class="wrap-check-text-edit-save-remove">
+      <div class="wrap-check-text-edit-save-remove flex flex-row align-items-center  justify-content-between">
         <div class="wrap-check-text-edit-save">
           <div
             class="check-text"
@@ -30,23 +30,6 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
               inputId="binary"
             ></p-checkbox>
 
-            <!-- <label
-              class="ml-2"
-              [ngClass]="{
-                'todo-complete': item.completed
-              }"
-              for=""
-              (keyup.Enter)="saveItem()"
-              [contentEditable]="isExpression"
-              >{{ item.title }}</label> -->
-
-            <!-- [ngClass]="{ 'todo-complete' : item.completed, }" -->
-            <!-- <input
-              type="checkbox"
-              class="todo-checkbox"
-              (click)="completeItem()"
-              [checked]="item.completed"
-            /> -->
 
             <!-- title doing -->
             <input
@@ -66,10 +49,6 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
           <!-- Button save-edit -->
           <div class="edit-save-button">
             <!-- Edit and Save button -->
-
-            <!-- <div *ngIf="isExpression" class="w-6 md:w-2 flex justify-content-end">
-                <button pButton pRipple label="Edit" icon="pi pi-pencil" class="p-button-text"></button>
-            </div> -->
 
             <button
               *ngIf="this.todo_isExpression"
@@ -174,10 +153,6 @@ export class TodoItemComponent implements OnInit {
   }
 
   saveItem() {
-    // console.log('Item: ' + this.item.fm_title);
-    // console.log('Form ' + this.todo_form.value.fm_title);
-    // // this.item = this.todo_form.value;
-    // console.log('Item++: ' + this.item.fm_title);
     if (this.todo_form.value.fm_title != null) {
       this.update.emit({
         item: this.item,

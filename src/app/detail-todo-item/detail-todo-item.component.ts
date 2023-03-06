@@ -50,7 +50,7 @@ import { TodoListService } from '../services/todo-list.service';
           style=" font-weight: 00"
         ></i>
         <a
-          routerLink=""
+          (click) = "showDetailTodolist()"
           class="p-1 font-semibold no-underline"
           style="color: #3399FF;"
         >
