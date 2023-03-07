@@ -28,6 +28,8 @@ import {FormGroup , FormBuilder ,Validators} from "@angular/forms";
 			</div>
 		</div> -->
 
+    <p-calendar [(ngModel)]="dateValue" [showTransitionOptions]="'500ms'" [hideTransitionOptions]="'250ms'"></p-calendar>
+    {{ dateValue }}
     <h1 class="text-900 text-xs font-bold text-6xl mb-4 text-center">
       Welcome to {{ title }}!
     </h1>
@@ -38,7 +40,7 @@ import {FormGroup , FormBuilder ,Validators} from "@angular/forms";
 })
 export class AppComponent  implements OnInit{
   values='đasa'
-
+  dateValue : any;
   constructor (private primengConfig: PrimeNGConfig) {
 
   }

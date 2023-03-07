@@ -27,18 +27,16 @@
           <!-- &&input_form.controls['fm_title'].dirty -->
           <!-- input_form.controls['fm_title'].invalid -->
           <!-- class="p-error" -->
-          <!-- <small id="username-help" class="p-error">Username is not available.</small> -->
+          <!-- severity="error" -->
           <small
             id="id-todo-title"
-
             text="Title todo is required"
             class="p-error"
             *ngIf="input_form.controls['fm_title'].invalid"
-          >Title todo is required!</small>
+            >Title todo is required!</small
+          >
 
-          <!-- <small id="id-todo-title" class="block"
-            >Enter your todo-title.</small
-          > -->
+          <small id="id-todo-title" class="block">Enter your todo-title.</small>
         </div>
         <!-- <span class="p-float-label">
           <input id="todo-title" type="text" pInputText [(ngModel)]="title"/>
@@ -71,7 +69,10 @@
         <div class="flex flex-column">
           <label for="start" class="mb-2">Todo start:</label>
           <p-calendar
+            placeholder="Start todo"
             formControlName="fm_time_start"
+            [showTransitionOptions]="'250ms'"
+            [hideTransitionOptions]="'125ms'"
             [showTime]="true"
             [showSeconds]="true"
             [showIcon]="true"
@@ -85,7 +86,10 @@
         <div class="flex flex-column">
           <label for="id_deadline" class="mb-2">Todo deadline:</label>
           <p-calendar
+            placeholder="Deadline todo"
             formControlName="fm_time_deadline"
+            [showTransitionOptions]="'500ms'"
+            [hideTransitionOptions]="'250ms'"
             [showTime]="true"
             [showSeconds]="true"
             [showIcon]="true"
