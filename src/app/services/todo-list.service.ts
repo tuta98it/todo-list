@@ -63,10 +63,10 @@ export class TodoListService {
     for (let index in this.todoList) {
       var changes = {};
       if (this.isSelect) {
-        changes = { completed: this.isSelect, comp_time: Date.now() };
+        changes = { fm_status_completed: this.isSelect, fm_time_completed: Date.now() };
         this.todoList[index] = { ...this.todoList[index], ...changes };
       } else {
-        changes = { completed: this.isSelect, comp_time: null };
+        changes = { fm_status_completed: this.isSelect, fm_time_completed: null };
         this.todoList[index] = { ...this.todoList[index], ...changes };
       }
     }

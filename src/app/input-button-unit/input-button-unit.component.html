@@ -11,18 +11,34 @@
     <div class="todo_setup-content" id="id-todo_setup-content">
       <div class="todo_setup-content--title">
         <div class="field">
-          <label for="id-todo-title" class="block">Todo tile</label>
+          <label for="id-todo-title" class="block">*Todo tile</label>
           <input
             formControlName="fm_title"
+            required
+            minlength="1"
+            placeholder="Title todo"
             style="width: -webkit-fill-available"
             id="id-todo-title"
             type="text"
-            aria-describedby="id-todo-title-help"
+            aria-describedby="id-todo-title"
             pInputText
           />
-          <small id="id-todo-title-help" class="block"
+          <!-- (!input_form.controls['fm_title'].valid) && -->
+          <!-- &&input_form.controls['fm_title'].dirty -->
+          <!-- input_form.controls['fm_title'].invalid -->
+          <!-- class="p-error" -->
+          <!-- <small id="username-help" class="p-error">Username is not available.</small> -->
+          <small
+            id="id-todo-title"
+
+            text="Title todo is required"
+            class="p-error"
+            *ngIf="input_form.controls['fm_title'].invalid"
+          >Title todo is required!</small>
+
+          <!-- <small id="id-todo-title" class="block"
             >Enter your todo-title.</small
-          >
+          > -->
         </div>
         <!-- <span class="p-float-label">
           <input id="todo-title" type="text" pInputText [(ngModel)]="title"/>
@@ -102,7 +118,7 @@
         icon="pi pi-refresh"
         iconPos="right"
         class="p-button-secondary"
-        (click)="input_form.reset()"
+        (click)="submitValue()"
       ></button>
 
       <p-button
@@ -126,8 +142,8 @@
       ></button>
     </div>
   </form>
-  <!-- {{ input_form.value | json }}
-  <button type="button" (click)="input_form.reset()">Rest</button> -->
+  {{ input_form.value | json }}
+  <button type="button" (click)="input_form.reset()">Rest</button>
 </div>
 <!-- <span class="p-float-label">
   <input

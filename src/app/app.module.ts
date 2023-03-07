@@ -20,6 +20,7 @@ import {InputTextareaModule} from 'primeng/inputtextarea';
 import {DropdownModule} from 'primeng/dropdown';
 import {PanelModule} from 'primeng/panel';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MessageModule} from 'primeng/message';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     DropdownModule,
     PanelModule,
     BrowserAnimationsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MessageModule
   ],
   providers: [TodoListService, StorageService],
   bootstrap: [AppComponent]
