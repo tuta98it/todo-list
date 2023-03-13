@@ -64,7 +64,10 @@
       style="margin-top: 20px"
       >Todo setup time</label
     >
-    <div class="todo_setup-time flex flex-row" id="id-todo_setup-time">
+    <div
+      class="todo_setup-time flex flex-row justify-content-between"
+      id="id-todo_setup-time"
+    >
       <div class="todo_setup-time--start mt-2">
         <div class="flex flex-column">
           <label for="start" class="mb-2">Todo start:</label>
@@ -122,7 +125,19 @@
         icon="pi pi-refresh"
         iconPos="right"
         class="p-button-secondary"
-        (click)="submitValue()"
+        (click)="resetAll()"
+      ></button>
+
+      <!-- Button remove all notification -->
+      <button
+        pButton
+        pRipple
+        type="button"
+        label="Reset all notification"
+        icon="pi pi-refresh"
+        iconPos="right"
+        class="p-button-warning"
+        (click)="removeAllNotification()"
       ></button>
 
       <p-button
@@ -146,9 +161,12 @@
       ></button>
     </div>
   </form>
-  {{ input_form.value | json }}
-  <button type="button" (click)="input_form.reset()">Rest</button>
+  <p-messages></p-messages>
+
+  <!-- {{ input_form.value | json }}
+  <button type="button" (click)="input_form.reset()">Rest</button> -->
 </div>
+
 <!-- <span class="p-float-label">
   <input
     id="float-input"

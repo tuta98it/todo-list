@@ -21,6 +21,8 @@ import {DropdownModule} from 'primeng/dropdown';
 import {PanelModule} from 'primeng/panel';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MessageModule} from 'primeng/message';
+import {MessagesModule} from 'primeng/messages';
+import {DialogModule} from 'primeng/dialog';
 
 @NgModule({
   declarations: [
@@ -45,7 +47,11 @@ import {MessageModule} from 'primeng/message';
     PanelModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
-    MessageModule
+    MessageModule,
+    MessagesModule,
+    DialogModule
+
+
   ],
   providers: [TodoListService, StorageService],
   bootstrap: [AppComponent]

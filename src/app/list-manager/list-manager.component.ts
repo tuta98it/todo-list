@@ -4,10 +4,14 @@ import { TodoListService } from '../services/todo-list.service';
 import { Router } from '@angular/router';
 import { DatePipe } from '@angular/common';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Message } from 'primeng//api';
+import { MessageService } from 'primeng/api';
+
 @Component({
   selector: 'app-list-manager',
   templateUrl: './list-manager.component.html',
   styleUrls: ['./list-manager.component.scss'],
+  providers: [MessageService],
 })
 export class ListManagerComponent implements OnInit {
   isShowTodoList = true;
@@ -33,16 +37,14 @@ export class ListManagerComponent implements OnInit {
   todoListMain: TodoItem[];
   todoListServiceMain: TodoListService;
 
-
   manager_item: any;
-  // todoListDetail: TodoItem[];
-  // todoListServiceDetail: TodoListService;
 
-
-
+  //Ẩn hiện dialog remove all
+  displayDialogRemove = false;
   constructor(
     private todoListServiceMain_t: TodoListService,
     // private todoListServiceDetail_t: TodoListService,
+    private messageService: MessageService, // Quản lý thông báo
     private router: Router,
     fb: FormBuilder
   ) {
@@ -68,6 +70,24 @@ export class ListManagerComponent implements OnInit {
 
   ngOnInit(): void {
     // this.hideTodoList();
+    // this.msgs = [
+    //   { severity: 'success',
+    //     summary: 'GeeksforGeeks',
+    //     detail: "This is a message"
+    //   },
+    //   { severity: 'info',
+    //     summary: 'GeeksforGeeks',
+    //     detail: "This is a message"
+    //   },
+    //   { severity: 'warn',
+    //     summary: 'GeeksforGeeks',
+    //     detail: "This is a message"
+    //   },
+    //   { severity: 'error',
+    //     summary: 'GeeksforGeeks',
+    //     detail: "This is a message"
+    //   }
+    // ];
   }
 
   hideTodoList() {
@@ -121,7 +141,24 @@ export class ListManagerComponent implements OnInit {
 
   updateItem(item: any, changes: any): void {
     this.todoListServiceMain.updateItem(item, changes);
+    this.messageService.add({
+      severity: 'success',
+      summary: 'Service Message',
+      detail:
+        'You have saved todo item "' +
+        this.form.value.fm_title +
+        '" successfully!',
+    });
     // this.todoListServiceDetail.updateItem(item, changes);
+  }
+
+  // Hiện thông bá0
+  showNotification(content: any, option: string) {
+    if (option == 'add') {
+      this.messageService.add(content);
+    } else if (option == 'clean') {
+      this.messageService.clear();
+    }
   }
 
   selectAll() {
@@ -136,8 +173,26 @@ export class ListManagerComponent implements OnInit {
 
   removeAll() {
     this.todoListServiceMain.removeAllTodo();
+    this.messageService.add({
+      severity: 'warn',
+      summary: 'Service Message',
+      detail:
+        'You had delete all todo items'
+    });
   }
 
+  showDialogRemove() {
+    this.displayDialogRemove = true;
+  }
+
+  cancelRemove() {
+    this.displayDialogRemove = false;
+  }
+
+  agreeRemove() {
+    this.removeAll();
+    this.displayDialogRemove = false;
+  }
   // //Hiện thị ra thời điểm tạo(dd/MM/YYYY), trạng thái (Hoàn thành, đang thực hiện), thời điểm hoàn thành(dd/MM/YYYY).
   showDetailTodolist() {
     this.router.navigate(['table-detail']);

@@ -1,50 +1,27 @@
 import { Component, OnInit } from '@angular/core';
 import { TodoItem } from './interfaces/todo-item';
-import {AccordionModule} from 'primeng/accordion';
-import {MenuItem} from 'primeng/api';
+import { AccordionModule } from 'primeng/accordion';
+import { MenuItem } from 'primeng/api';
 
 import { PrimeNGConfig } from 'primeng/api';
-import {FormGroup , FormBuilder ,Validators} from "@angular/forms";
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
   // templateUrl: './app.component.html',
   template: `
-    <!-- <p-chips [(ngModel)]="values"></p-chips>
 
-    <h1 class="app-title">
-      Welcome to {{ title }}!
-    </h1>
-    <div class="card">
-			<h5>Severities</h5>
-			<div class="flex flex-wrap gap-2">
-				<button pButton pRipple type="button" label="Primary"></button>
-				<button pButton pRipple type="button" label="Secondary" class="p-button-secondary"></button>
-				<button pButton pRipple type="button" label="Success" class="p-button-success"></button>
-				<button pButton pRipple type="button" label="Info" class="p-button-info"></button>
-				<button pButton pRipple type="button" label="Warning" class="p-button-warning"></button>
-				<button pButton pRipple type="button" label="Help" class="p-button-help"></button>
-				<button pButton pRipple type="button" label="Danger" class="p-button-danger"></button>
-			</div>
-		</div> -->
 
-    <p-calendar [(ngModel)]="dateValue" [showTransitionOptions]="'500ms'" [hideTransitionOptions]="'250ms'"></p-calendar>
-    {{ dateValue }}
     <h1 class="text-900 text-xs font-bold text-6xl mb-4 text-center">
       Welcome to {{ title }}!
     </h1>
-
     <router-outlet></router-outlet>
   `,
   styleUrls: ['./app.component.scss'],
 })
-export class AppComponent  implements OnInit{
-  values='đasa'
-  dateValue : any;
-  constructor (private primengConfig: PrimeNGConfig) {
-
-  }
-
+export class AppComponent implements OnInit {
+  displayDialog = true;
+  constructor(private primengConfig: PrimeNGConfig) {}
 
   ngOnInit(): void {
     this.primengConfig.ripple = true;
@@ -52,7 +29,7 @@ export class AppComponent  implements OnInit{
   title = 'todo-list';
   isShow = true;
 
-  hideListManage(){
+  hideListManage() {
     this.isShow = false;
   }
   // todoList : TodoItem[] = [

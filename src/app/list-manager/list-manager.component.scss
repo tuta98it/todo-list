@@ -1,7 +1,7 @@
 .todo-app {
   // list-style-type: none;
   position: relative;
-  width: 80%;
+  width: 60%;
   padding: 30px 30px 15px;
   background: white;
   border: 1px solid;
@@ -9,7 +9,8 @@
   border-radius: 2px;
   -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-  margin: 20px auto;
+  // margin: 20px auto;
+  margin-top: 20px;
 
   // animation
   animation-name: show_todo-list;
@@ -21,7 +22,53 @@
   animation-play-state: running;
   animation-timing-function: linear;
 
+  height: fit-content;
 }
+
+.notification-add-success {
+  position: absolute;
+  top: 20px;
+  right: 94px;
+  // top: 600px;
+  // right: 920px;
+
+
+
+
+  animation-name: show_notification;
+  animation-delay: 0s;
+  animation-direction: normal;
+  animation-duration: 1000ms;
+  animation-fill-mode: none;
+  animation-iteration-count: 1;
+  animation-play-state: running;
+  animation-timing-function: ease;
+}
+
+
+@keyframes show_notification {
+  0% {
+    // box-shadow: 6px -4px 20px #fff;
+    transform: scale(0);
+    // transform : rotate(270deg);
+    opacity: 0;
+
+    // oxy
+    top: 600px;
+    right: 920px;
+  }
+
+  100% {
+    // box-shadow: 6px -4px 2px #fff;
+    transform: scale(1);
+    // transform : rotate(0deg);
+    opacity: 1;
+    // oxy
+    top: 20px;
+    right: 94px;
+  }
+}
+
 
 .block-input {
   width: 60%;
@@ -34,7 +81,7 @@
 }
 
 
-.todo-app ul{
+.todo-app ul {
   margin: 0;
   margin-top: 2px;
 }

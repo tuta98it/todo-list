@@ -8,7 +8,9 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
   selector: 'app-todo-item',
   template: `
     <div class="todo-item">
-      <div class="wrap-check-text-edit-save-remove flex flex-row align-items-center  justify-content-between">
+      <div
+        class="wrap-check-text-edit-save-remove flex flex-row align-items-center  justify-content-between"
+      >
         <div class="wrap-check-text-edit-save">
           <div
             class="check-text"
@@ -29,7 +31,6 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
               (onChange)="completeItem()"
               inputId="binary"
             ></p-checkbox>
-
 
             <!-- title doing -->
             <input
@@ -78,19 +79,49 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
           </div>
         </div>
         <!-- Remove button -->
-        <button class="btn btn-red" (click)="removeItem()">
+        <button class="btn btn-red" (click)="showDialogRemove()">
           <div class="flex flex-direction-row align-items-center">
             <i class="pi pi-trash mr-1 text-xs"></i>
             <span>Remove</span>
           </div>
         </button>
+
         <!-- <button class="btn btn-red" (click)="removeItem()">Remove</button> -->
       </div>
       <div class="flex align-items-center mt-1 ml-2 text-xs">
         <i class="pi pi-clock mr-2"></i>
-        <span><b>Time to creation:</b> {{ item.fm_time_creation | date : 'medium' }}</span>
+        <span
+          ><b>Time to creation:</b>
+          {{ item.fm_time_creation | date : 'medium' }}</span
+        >
       </div>
     </div>
+    <!-- Hộp thoại thông báo đồng ý xoá item todo -->
+    <p-dialog
+          header="Notification"
+          [(visible)]="displayDialogRemove"
+          [modal]="true"
+        >
+          <p>Are you sure want to delete this todo item?</p>
+          <div class="flex justify-content-between">
+            <button
+              type="button"
+              pButton
+              icon="pi pi-trash"
+              (click)="cancelRemove()"
+              label="Huỷ"
+              class="p-button-danger"
+            ></button>
+            <button
+
+              type="button"
+              pButton
+              icon="pi pi-check"
+              (click)="agreeRemove()"
+              label="Đồng ý"
+            ></button>
+          </div>
+        </p-dialog>
   `,
   styleUrls: ['./todo-item.component.scss'],
 })
@@ -114,11 +145,37 @@ export class TodoItemComponent implements OnInit {
 
   @Output() remove: EventEmitter<any> = new EventEmitter<any>();
   @Output() update: EventEmitter<any> = new EventEmitter<any>();
+  @Output() notification: EventEmitter<any> = new EventEmitter<any>();
   constructor() {}
 
+  // Ẩn hiện dialog thông báo Remove
+  displayDialogRemove = false;
+  // Đồng ý xoá item
+  isRemove = false;
+
   ngOnInit() {}
+  showDialogRemove() {
+    this.displayDialogRemove = true;
+  }
+  cancelRemove() {
+    this.isRemove = false;
+    this.displayDialogRemove = false;
+  }
+  agreeRemove() {
+    this.isRemove = true;
+    this.removeItem();
+    this.displayDialogRemove = false;
+  }
   removeItem(): void {
     this.remove.emit(this.item);
+    this.notification.emit({
+      content: {
+        severity: 'warn',
+        summary: 'Service Message',
+        detail: 'You just deleted todo item "' + this.item.fm_title + '"',
+      },
+      option: 'add'
+    });
   }
 
   editItem() {
@@ -150,6 +207,8 @@ export class TodoItemComponent implements OnInit {
     //Đưa dữ liệu item ra ngoài List manager
     // this.todo_item = this.item;
     this.todo_itemChange.emit(this.item);
+
+    //
   }
 
   saveItem() {

@@ -1,73 +1,118 @@
-<div *ngIf="isShowTodoList" class="flex flex-row todo-app">
-  <!-- [(input_isExpression)]="isExpression" -->
-  <div class="block-input">
-    <app-input-button-unit
-      [(input_form)]="form"
-      [input_item]="manager_item"
-      (submit)="addItem($event)"
-      (update)="updateItem($event.item, $event.changes)"
-    ></app-input-button-unit>
-  </div>
+<!-- class="flex justify-content-between"  -->
+<div class="grid justify-content-center">
+  <!-- [showTransitionOptions]="'0ms'" [hideTransitionOptions]="'0ms'" -->
 
-  <div class="block-detail">
-    <!-- Button all -->
-    <div class="block-button-all">
-      <!-- <button *ngIf="todoListMain.length != 0" class="btn" (click)="selectAll()">Select All</button> -->
-      <!-- <p-button label="All" icon="pi pi-check" class='bg'></p-button> -->
-      <button
-        *ngIf="todoListMain.length != 0"
-        (click)="selectAll()"
-        pButton
-        pRipple
-        type="button"
-        label="All"
-        icon="pi pi-check"
-        class="p-button-success"
-      ></button>
-
-      <!-- <button *ngIf="todoListMain.length != 0" class="btn btn-red" (click)="removeAll()">Remove All</button> -->
-      <!-- <p-button label="All" icon="pi pi-check"></p-button> -->
-      <button
-        *ngIf="todoListMain.length != 0"
-        (click)="removeAll()"
-        pButton
-        pRipple
-        type="button"
-        label="All"
-        icon="pi pi-trash"
-        class="p-button-danger"
-      ></button>
+  <div
+    *ngIf="isShowTodoList"
+    class="flex flex-row field col-12 md:col-10 todo-app"
+  >
+    <!-- [(input_isExpression)]="isExpression" -->
+    <div class="block-input">
+      <app-input-button-unit
+        [(input_form)]="form"
+        [input_item]="manager_item"
+        (submit)="addItem($event)"
+        (update)="updateItem($event.item, $event.changes)"
+        (notification)="showNotification($event.content, $event.option)"
+      ></app-input-button-unit>
     </div>
 
-    <!-- List to-do -->
-    <ul>
-      <li *ngFor="let todoItem of todoListMain">
-        <app-todo-item
-          [todo_isEdit]="isEdit"
-          [todo_form]="form"
-          [item]="todoItem"
-          [(todo_item)]="manager_item"
-          (remove)="removeItem($event)"
-          (update)="updateItem($event.item, $event.changes)"
-        ></app-todo-item>
-      </li>
-    </ul>
+    <div class="block-detail">
+      <!-- Button all -->
+      <div class="block-button-all">
+        <!-- <button *ngIf="todoListMain.length != 0" class="btn" (click)="selectAll()">Select All</button> -->
+        <!-- <p-button label="All" icon="pi pi-check" class='bg'></p-button> -->
+        <button
+          *ngIf="todoListMain.length != 0"
+          (click)="selectAll()"
+          pButton
+          pRipple
+          type="button"
+          label="All"
+          icon="pi pi-check"
+          class="p-button-success"
+        ></button>
 
-    <!-- Detail button-->
-    <div
-      class="flex align-item-center justify-content-end flex-direction-row text-sm font-italic details-more--button"
-    >
-      <a
-        routerLink="table-detail"
-        class="p-1 font-semibold no-underline"
-        style="color: #3399ff"
+        <!-- <button *ngIf="todoListMain.length != 0" class="btn btn-red" (click)="removeAll()">Remove All</button> -->
+        <!-- <p-button label="All" icon="pi pi-check"></p-button> -->
+        <button
+          *ngIf="todoListMain.length != 0"
+          (click)="showDialogRemove()"
+          pButton
+          pRipple
+          type="button"
+          label="All"
+          icon="pi pi-trash"
+          class="p-button-danger"
+        ></button>
+      </div>
+
+      <!-- List to-do -->
+      <ul>
+        <li *ngFor="let todoItem of todoListMain">
+          <app-todo-item
+            [todo_isEdit]="isEdit"
+            [todo_form]="form"
+            [item]="todoItem"
+            [(todo_item)]="manager_item"
+            (remove)="removeItem($event)"
+            (update)="updateItem($event.item, $event.changes)"
+            (notification)="showNotification($event.content, $event.option)"
+          ></app-todo-item>
+        </li>
+      </ul>
+
+      <!-- Detail button-->
+      <div
+        class="flex align-item-center justify-content-end flex-direction-row text-sm font-italic details-more--button"
       >
-        Details more
-      </a>
-      <i
-        class="flex justify-content-center align-items-center pi pi-angle-double-right"
-      ></i>
+        <a
+          routerLink="table-detail"
+          class="p-1 font-semibold no-underline"
+          style="color: #3399ff"
+        >
+          Details more
+        </a>
+        <i
+          class="flex justify-content-center align-items-center pi pi-angle-double-right"
+        ></i>
+      </div>
     </div>
+    <!-- <router-outlet></router-outlet> -->
   </div>
-  <!-- <router-outlet></router-outlet> -->
+
+  <div class="field col-12 md:col-2">
+    <p-messages></p-messages>
+  </div>
+  <!-- <div class="notification-add-success">
+    <p-message
+    severity="success"
+    text="PrimeNG Rocks"
+    ></p-message>
+
+  </div> -->
 </div>
+<p-dialog
+  header="Notification"
+  [(visible)]="displayDialogRemove"
+  [modal]="true"
+>
+  <p>Are you sure want to delete all todo items?</p>
+  <div class="flex justify-content-between">
+    <button
+      type="button"
+      pButton
+      icon="pi pi-trash"
+      (click)="cancelRemove()"
+      label="Huỷ"
+      class="p-button-danger"
+    ></button>
+    <button
+      type="button"
+      pButton
+      icon="pi pi-check"
+      (click)="agreeRemove()"
+      label="Đồng ý"
+    ></button>
+  </div>
+</p-dialog>

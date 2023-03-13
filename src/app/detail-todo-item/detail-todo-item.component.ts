@@ -6,7 +6,7 @@ import { TodoListService } from '../services/todo-list.service';
   selector: 'app-detail-todo-item',
   template: `
     <div class="block-detail-todo-item">
-      <h2>Infomation detail todo:</h2>
+      <h2>Information detail todo:</h2>
       <ul>
         <li class="text-item"><b>Work to do:</b> {{ item.fm_title }}</li>
 

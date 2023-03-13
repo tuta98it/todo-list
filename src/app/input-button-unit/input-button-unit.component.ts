@@ -4,14 +4,17 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Priority } from '../interfaces/priority';
 import { TodoItemComponent } from '../todo-item/todo-item.component';
 
-
+import { Message } from 'primeng//api';
+import { MessageService } from 'primeng/api';
 @Component({
   selector: 'app-input-button-unit',
   templateUrl: './input-button-unit.component.html',
   styleUrls: ['./input-button-unit.component.scss'],
+  providers: [MessageService],
 })
 export class InputButtonUnitComponent implements OnInit {
   title: string;
+  // msgs?: MessageService[];
   @Input() input_item: any;
 
   listPriority: Priority[];
@@ -35,9 +38,11 @@ export class InputButtonUnitComponent implements OnInit {
 
   @Output() submit: EventEmitter<any> = new EventEmitter<any>();
   @Output() update: EventEmitter<any> = new EventEmitter<any>();
+  @Output() notification: EventEmitter<any> = new EventEmitter<any>();
 
   // static form: FormGroup<any>;
   // TodoItemComponent: any;
+  // private messageService: MessageService
 
   constructor(fb: FormBuilder) {
     this.value = new Date();
@@ -107,16 +112,46 @@ export class InputButtonUnitComponent implements OnInit {
       // this.item.title = this.title;
       this.input_form.controls['fm_time_creation'].setValue(new Date());
       this.submit.emit(this.input_form.value);
+
+      // Enable notification add success item
+      // this.messageService.add({
+      //   severity: 'success',
+      //   summary: 'Service Message',
+      //   detail: 'Todo has been created successfully',
+      // });
+      this.notification.emit({
+        content: {
+          severity: 'success',
+          summary: 'Service Message',
+          detail:
+            'Todo has been created successfully todo item "' +
+            this.input_form.value.fm_title +
+            '"',
+        },
+        option: 'add',
+      });
+    } else {
+      // Enable notification add erro item
+      // this.messageService.add({
+      //   severity: 'error',
+      //   summary: 'Service Message',
+      //   detail: 'An error has occurred. Title cannit be empty!',
+      // });
+      this.notification.emit({
+        content: {
+          severity: 'error',
+          summary: 'Service Message',
+          detail: 'An error has occurred. Title cannit be empty!',
+        },
+        option: 'add',
+      });
     }
 
     //Xoá dữ liệu trên form
-    // this.input_form.reset();
     this.resetForm();
   }
 
   saveValue() {
-    console.log('this.input_item.fm_title:' + this.input_item.fm_title);
-
     //Lưu dữ liệu lại story
     this.update.emit({
       item: this.input_item,
@@ -127,12 +162,18 @@ export class InputButtonUnitComponent implements OnInit {
     this.input_form.controls['fm_btn_submit'].setValue(
       !this.input_form.value.fm_btn_submit
     );
+  }
 
-    //Xoá dữ liệu trên form
+  resetAll() {
+    //Xoá tất cả trường đăng nhập
     this.resetForm();
+
+    //Xoá tất cả thông báo
+    this.removeAllNotification();
   }
 
   resetForm() {
+    // Reset value input fiels.
     this.input_form.controls['fm_title'].setValue(null);
     this.input_form.controls['fm_description'].setValue(null);
     this.input_form.controls['fm_time_start'].setValue(null);
@@ -140,7 +181,21 @@ export class InputButtonUnitComponent implements OnInit {
     this.input_form.controls['fm_priority'].setValue(null);
   }
 
+  removeAllNotification() {
+    //remove all notification
+    this.notification.emit({
+      option: 'clean',
+    });
+    this.notification.emit({
+      content: {
+        severity: 'warn',
+        summary: 'Service Message',
+        detail: 'You have saved todo item "' + this.input_form.value.fm_title + '" successfully!'
+      },
+      option: 'add'
+    });
 
+  }
 
   isEmpty(str: string) {
     return !str || str.length === 0;
