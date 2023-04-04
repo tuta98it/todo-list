@@ -6,7 +6,7 @@ import { DatePipe } from '@angular/common';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Message } from 'primeng//api';
 import { MessageService } from 'primeng/api';
-
+import { MenuItem } from 'primeng/api';
 @Component({
   selector: 'app-list-manager',
   templateUrl: './list-manager.component.html',
@@ -39,6 +39,8 @@ export class ListManagerComponent implements OnInit {
 
   manager_item: any;
 
+  // Thành phần trang menu
+  items: MenuItem[];
   //Ẩn hiện dialog remove all
   displayDialogRemove = false;
   constructor(
@@ -64,11 +66,36 @@ export class ListManagerComponent implements OnInit {
       fm_btn_reset: [null, Validators.required],
       fm_btn_submit: [true, Validators.required],
     });
+
+    this.items = [
+      {
+          label: 'Options',
+          items: [
+              {
+                  label: 'Select all',
+                  icon: 'pi pi-check',
+                  command: () => {
+                      this.selectAll();
+                      // this.update();
+                  }
+              },
+              {
+                  label: 'Delete All',
+                  icon: 'pi pi-trash',
+                  command: () => {
+                    this.showDialogRemove();
+                      // this.delete();
+                  }
+              }
+          ]
+      },
+  ];
     // this.todoListServiceDetail = todoListServiceDetail_t;
     // this.todoListDetail = todoListServiceDetail_t.getTodoList();
   }
 
   ngOnInit(): void {
+
     // this.hideTodoList();
     // this.msgs = [
     //   { severity: 'success',

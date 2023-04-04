@@ -1,4 +1,6 @@
 <!-- class="flex justify-content-between"  -->
+<p-toast></p-toast>
+<p-menu #menu [model]="items" [popup]="true"></p-menu>
 <div class="grid justify-content-center">
   <!-- [showTransitionOptions]="'0ms'" [hideTransitionOptions]="'0ms'" -->
 
@@ -18,11 +20,19 @@
     </div>
 
     <div class="block-detail">
+
       <!-- Button all -->
+
       <div class="block-button-all">
         <!-- <button *ngIf="todoListMain.length != 0" class="btn" (click)="selectAll()">Select All</button> -->
         <!-- <p-button label="All" icon="pi pi-check" class='bg'></p-button> -->
-        <button
+
+
+        <button pButton class="text-xs" style="width:100%" type="button" (click)="menu.toggle($event)" icon="pi pi-bars" label="Menu"></button>
+
+
+
+        <!-- <button
           *ngIf="todoListMain.length != 0"
           (click)="selectAll()"
           pButton
@@ -31,11 +41,12 @@
           label="All"
           icon="pi pi-check"
           class="p-button-success"
-        ></button>
+        ></button> -->
 
         <!-- <button *ngIf="todoListMain.length != 0" class="btn btn-red" (click)="removeAll()">Remove All</button> -->
         <!-- <p-button label="All" icon="pi pi-check"></p-button> -->
-        <button
+
+        <!-- <button
           *ngIf="todoListMain.length != 0"
           (click)="showDialogRemove()"
           pButton
@@ -44,7 +55,7 @@
           label="All"
           icon="pi pi-trash"
           class="p-button-danger"
-        ></button>
+        ></button> -->
       </div>
 
       <!-- List to-do -->

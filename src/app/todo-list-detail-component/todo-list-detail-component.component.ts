@@ -9,7 +9,7 @@ import {
 import { TodoItem } from '../interfaces/todo-item';
 import { TodoListService } from '../services/todo-list.service';
 import { Router } from '@angular/router';
-
+import { NzButtonModule } from 'ng-zorro-antd/button';
 @Component({
   selector: 'app-todo-list-detail-component',
   templateUrl: './todo-list-detail-component.component.html',
@@ -50,9 +50,7 @@ export class TodoListDetailComponentComponent implements OnInit {
   setStatus(item: any): string {
     var status: string;
     status = '';
-    console.log('item.fm_status_completed: ' + item.fm_status_completed);
     if (item.fm_status_completed) {
-      status.concat('Complete!');
       var milliSecondDiff =
         new Date(item.fm_time_completed).getTime() -
         new Date(item.fm_time_deadline).getTime();
@@ -64,7 +62,7 @@ export class TodoListDetailComponentComponent implements OnInit {
         status = 'Completed on schedule!';
       }
     } else {
-      status = 'Procseting ...';
+      status = 'Procseting ';
     }
     return status;
   }

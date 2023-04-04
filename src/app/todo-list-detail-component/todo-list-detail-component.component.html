@@ -108,6 +108,18 @@
               }"
             >
               {{ setStatus(todoItem) }}
+              <!-- icon loading -->
+              <span
+                *ngIf="!todoItem.fm_status_completed"
+                nz-icon
+                [nzType]="'loading'"
+              ></span>
+              <span
+                *ngIf="todoItem.fm_status_completed"
+                nz-icon
+                nzType="check"
+                nzTheme="outline"
+              ></span>
             </div>
             <i
               *ngIf="todoItem.fm_status_completed"

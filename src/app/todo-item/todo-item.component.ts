@@ -174,6 +174,8 @@ export class TodoItemComponent implements OnInit {
         summary: 'Warning',
         detail: 'You just deleted todo item "' + this.item.fm_title + '"',
       },
+
+
       option: 'add'
     });
   }

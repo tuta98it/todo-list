@@ -32,6 +32,9 @@ import en from '@angular/common/locales/en';
 import { HttpClientModule } from '@angular/common/http';
 import { NzResultModule } from 'ng-zorro-antd/result';
 import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzIconModule } from 'ng-zorro-antd/icon';
+import { MenubarModule } from 'primeng/menubar';
+import {MenuModule} from 'primeng/menu';
 
 registerLocaleData(en);
 
@@ -65,9 +68,11 @@ registerLocaleData(en);
     DialogModule,
     ToastModule,
     HttpClientModule,
+    MenubarModule,
     NzResultModule,
-    NzButtonModule
-
+    NzButtonModule,
+    NzIconModule,
+    MenuModule
   ],
   providers: [TodoListService, StorageService, { provide: NZ_I18N, useValue: en_US }],
   bootstrap: [AppComponent]
