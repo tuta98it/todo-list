@@ -35,7 +35,7 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { MenubarModule } from 'primeng/menubar';
 import {MenuModule} from 'primeng/menu';
-
+import { AutoCompleteModule } from 'primeng/autocomplete';
 registerLocaleData(en);
 
 
@@ -72,7 +72,8 @@ registerLocaleData(en);
     NzResultModule,
     NzButtonModule,
     NzIconModule,
-    MenuModule
+    MenuModule,
+    AutoCompleteModule
   ],
   providers: [TodoListService, StorageService, { provide: NZ_I18N, useValue: en_US }],
   bootstrap: [AppComponent]

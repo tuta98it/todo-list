@@ -12,7 +12,7 @@
       <div class="todo_setup-content--title">
         <div class="field">
           <label for="id-todo-title" class="block">*Todo tile</label>
-          <input
+          <!-- <input
             formControlName="fm_title"
             required
             minlength="1"
@@ -22,7 +22,20 @@
             type="text"
             aria-describedby="id-todo-title"
             pInputText
-          />
+          /> -->
+
+          <p-autoComplete
+            class="title-todolist"
+            formControlName="fm_title"
+            minlength="1"
+            placeholder="Title todo"
+            id="id-todo-title"
+            [(ngModel)]="selectedTitle"
+            [suggestions]="filteredTitles"
+            (completeMethod)="filterItem($event)"
+            field=""
+          ></p-autoComplete>
+
           <!-- (!input_form.controls['fm_title'].valid) && -->
           <!-- &&input_form.controls['fm_title'].dirty -->
           <!-- input_form.controls['fm_title'].invalid -->

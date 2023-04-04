@@ -16,11 +16,11 @@
   flex-grow: 1;
 }
 
-.ml-10{
+.ml-10 {
   margin-left: 10px;
 }
 
-.m-5{
+.m-5 {
   margin: 5px;
 }
 
@@ -38,6 +38,7 @@
   padding: 5px;
 
 }
+
 .todo_setup-content--title {}
 
 .todo_setup-content--description {
@@ -59,4 +60,15 @@
 .todo_setup-btn {
   display: flex;
   justify-content: space-between;
+}
+
+
+.title-todolist {
+  span {
+    width: 100%;
+
+    input {
+      width: 100%;
+    }
+  }
 }
