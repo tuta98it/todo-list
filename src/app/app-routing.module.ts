@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { TodoListDetailComponentComponent } from './todo-list-detail-component/todo-list-detail-component.component';
 import { ListManagerComponent } from './list-manager/list-manager.component';
 import { DetailTodoItemComponent } from './detail-todo-item/detail-todo-item.component';
-
+import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
 export const appRoutes: Routes = [
   // {path: "home", component: HomeComponent, children:[
   //   { path: 'child', component: ChildHomeComponent, },
@@ -30,6 +30,9 @@ export const appRoutes: Routes = [
     path: 'table-detail/:id',
     component: DetailTodoItemComponent,
   },
+
+  { path: '**', pathMatch: 'full',
+        component: PagenotfoundComponent },
 ];
 
 @NgModule({

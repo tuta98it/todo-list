@@ -23,6 +23,18 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MessageModule} from 'primeng/message';
 import {MessagesModule} from 'primeng/messages';
 import {DialogModule} from 'primeng/dialog';
+import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
+import {ToastModule} from 'primeng/toast';
+import { NZ_I18N } from 'ng-zorro-antd/i18n';
+import { en_US } from 'ng-zorro-antd/i18n';
+import { registerLocaleData } from '@angular/common';
+import en from '@angular/common/locales/en';
+import { HttpClientModule } from '@angular/common/http';
+import { NzResultModule } from 'ng-zorro-antd/result';
+import { NzButtonModule } from 'ng-zorro-antd/button';
+
+registerLocaleData(en);
+
 
 @NgModule({
   declarations: [
@@ -31,7 +43,8 @@ import {DialogModule} from 'primeng/dialog';
     TodoItemComponent,
     ListManagerComponent,
     TodoListDetailComponentComponent,
-    DetailTodoItemComponent
+    DetailTodoItemComponent,
+    PagenotfoundComponent
   ],
   imports: [
     BrowserModule,
@@ -49,11 +62,14 @@ import {DialogModule} from 'primeng/dialog';
     ReactiveFormsModule,
     MessageModule,
     MessagesModule,
-    DialogModule
-
+    DialogModule,
+    ToastModule,
+    HttpClientModule,
+    NzResultModule,
+    NzButtonModule
 
   ],
-  providers: [TodoListService, StorageService],
+  providers: [TodoListService, StorageService, { provide: NZ_I18N, useValue: en_US }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

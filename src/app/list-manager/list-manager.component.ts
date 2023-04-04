@@ -175,7 +175,7 @@ export class ListManagerComponent implements OnInit {
     this.todoListServiceMain.removeAllTodo();
     this.messageService.add({
       severity: 'warn',
-      summary: 'Service Message',
+      summary: 'Warning',
       detail:
         'You had delete all todo items'
     });

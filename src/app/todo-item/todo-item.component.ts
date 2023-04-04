@@ -171,7 +171,7 @@ export class TodoItemComponent implements OnInit {
     this.notification.emit({
       content: {
         severity: 'warn',
-        summary: 'Service Message',
+        summary: 'Warning',
         detail: 'You just deleted todo item "' + this.item.fm_title + '"',
       },
       option: 'add'

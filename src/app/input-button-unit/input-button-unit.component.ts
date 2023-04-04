@@ -122,7 +122,7 @@ export class InputButtonUnitComponent implements OnInit {
       this.notification.emit({
         content: {
           severity: 'success',
-          summary: 'Service Message',
+          summary: 'Success',
           detail:
             'Todo has been created successfully todo item "' +
             this.input_form.value.fm_title +
@@ -140,7 +140,7 @@ export class InputButtonUnitComponent implements OnInit {
       this.notification.emit({
         content: {
           severity: 'error',
-          summary: 'Service Message',
+          summary: 'Error',
           detail: 'An error has occurred. Title cannit be empty!',
         },
         option: 'add',
@@ -189,8 +189,8 @@ export class InputButtonUnitComponent implements OnInit {
     this.notification.emit({
       content: {
         severity: 'warn',
-        summary: 'Service Message',
-        detail: 'You have saved todo item "' + this.input_form.value.fm_title + '" successfully!'
+        summary: 'Warning',
+        detail: 'You jusst deleted all notifications web-app todo-list!'
       },
       option: 'add'
     });
