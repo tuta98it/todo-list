@@ -78,39 +78,45 @@
       >Todo setup time</label
     >
     <div
-      class="todo_setup-time flex flex-row justify-content-between"
+      class="todo_setup-time flex flex-row"
       id="id-todo_setup-time"
     >
       <div class="todo_setup-time--start mt-2">
         <div class="flex flex-column">
           <label for="start" class="mb-2">Todo start:</label>
           <p-calendar
-            placeholder="Start todo"
+            placeholder="Start : mm/dd/yyyy"
             formControlName="fm_time_start"
             [showTransitionOptions]="'250ms'"
             [hideTransitionOptions]="'125ms'"
             [showTime]="true"
             [showSeconds]="true"
             [showIcon]="true"
+            [readonlyInput]="true"
+            [numberOfMonths]="1"
             inputId="start"
           ></p-calendar>
         </div>
         <!-- <p-calendar [(ngModel)]="value"></p-calendar> -->
       </div>
 
-      <div class="todo_setup-time--deadline mt-2 ml-2">
+      <div class="todo_setup-time--deadline mt-2 ml-8">
         <div class="flex flex-column">
           <label for="id_deadline" class="mb-2">Todo deadline:</label>
           <p-calendar
-            placeholder="Deadline todo"
+            placeholder="End : mm/dd/yyyy"
             formControlName="fm_time_deadline"
             [showTransitionOptions]="'500ms'"
             [hideTransitionOptions]="'250ms'"
             [showTime]="true"
             [showSeconds]="true"
             [showIcon]="true"
+            [readonlyInput]="true"
+            [numberOfMonths]="2"
             inputId="id_deadline"
-          ></p-calendar>
+          >
+            <ng-template pTemplate="header">Start todo</ng-template>
+          </p-calendar>
         </div>
       </div>
     </div>
@@ -137,7 +143,7 @@
         label="Reset"
         icon="pi pi-refresh"
         iconPos="right"
-        class="p-button-secondary"
+        class="p-button-danger"
         (click)="resetAll()"
       ></button>
 
@@ -149,7 +155,7 @@
         label="Reset all notification"
         icon="pi pi-refresh"
         iconPos="right"
-        class="p-button-warning"
+        class="p-button-danger"
         (click)="removeAllNotification()"
       ></button>
 
