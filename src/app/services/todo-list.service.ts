@@ -94,4 +94,12 @@ export class TodoListService {
   getTodoList(): TodoItem[] {
     return this.todoList;
   }
+
+  getTitleList(): string[]{
+    var lsStr:string[] = [];
+    this.todoList.forEach(item => {
+      lsStr.push(item.fm_title);
+    });
+    return lsStr;
+  }
 }

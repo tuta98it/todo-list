@@ -12,17 +12,6 @@
       <div class="todo_setup-content--title">
         <div class="field">
           <label for="id-todo-title" class="block">*Todo tile</label>
-          <!-- <input
-            formControlName="fm_title"
-            required
-            minlength="1"
-            placeholder="Title todo"
-            style="width: -webkit-fill-available"
-            id="id-todo-title"
-            type="text"
-            aria-describedby="id-todo-title"
-            pInputText
-          /> -->
 
           <p-autoComplete
             class="title-todolist"
@@ -43,10 +32,16 @@
           <!-- severity="error" -->
           <small
             id="id-todo-title"
-            text="Title todo is required"
             class="p-error"
             *ngIf="input_form.controls['fm_title'].invalid"
             >Title todo is required!</small
+          >
+
+          <small
+            id="id-todo-title"
+            class="p-error"
+            *ngIf="input_form.get('fm_title')?.errors?.['titlenameDuplicated']"
+            >. Duplicated username!</small
           >
 
           <small id="id-todo-title" class="block">Enter your todo-title.</small>
@@ -136,48 +131,44 @@
     </div>
 
     <div class="todo_setup-btn mt-4">
-      <button
-        pButton
+      <p-button
         pRipple
         type="button"
         label="Reset"
         icon="pi pi-refresh"
         iconPos="right"
-        class="p-button-danger"
+        class="p-button-danger p-button-sm"
         (click)="resetAll()"
-      ></button>
+      ></p-button>
 
       <!-- Button remove all notification -->
-      <button
-        pButton
+      <p-button
         pRipple
         type="button"
         label="Reset all notification"
         icon="pi pi-refresh"
         iconPos="right"
-        class="p-button-danger"
+        class="p-button-danger p-button-sm"
         (click)="removeAllNotification()"
-      ></button>
+      ></p-button>
 
       <p-button
         *ngIf="this.input_form.value.fm_btn_submit"
-        label="Submit"
+        label="Submit "
         icon="pi pi-check"
         iconPos="right"
-        class=""
+        class="p-button-sm"
         (click)="submitValue()"
       ></p-button>
 
-      <button
+      <p-button
         *ngIf="!this.input_form.value.fm_btn_submit"
-        pButton
-        pRipple
         label="Save"
         icon="pi pi-check"
         iconPos="right"
-        class="p-button-success"
+        class="p-button-success p-button-sm"
         (click)="saveValue()"
-      ></button>
+      ></p-button>
     </div>
   </form>
   <!-- <p-messages></p-messages> -->

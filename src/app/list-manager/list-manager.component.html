@@ -111,20 +111,21 @@
 >
   <p>Are you sure want to delete all todo items?</p>
   <div class="flex justify-content-between">
-    <button
+    <p-button
       type="button"
       pButton
       icon="pi pi-trash"
       (click)="cancelRemove()"
-      label="Huỷ"
-      class="p-button-danger"
-    ></button>
-    <button
+      styleClass="Huỷ"
+      class="p-button-danger p-button-sm"
+    ></p-button>
+    <p-button
       type="button"
       pButton
       icon="pi pi-check"
       (click)="agreeRemove()"
       label="Đồng ý"
-    ></button>
+      styleClass="p-button-sm"
+    ></p-button>
   </div>
 </p-dialog>

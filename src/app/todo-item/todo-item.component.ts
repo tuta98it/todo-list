@@ -103,23 +103,23 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
           [modal]="true"
         >
           <p>Are you sure want to delete this todo item?</p>
-          <div class="flex justify-content-between">
-            <button
+          <div class="flex justify-content-around">
+            <p-button
               type="button"
-              pButton
+
               icon="pi pi-trash"
               (click)="cancelRemove()"
               label="Huỷ"
-              class="p-button-danger"
-            ></button>
-            <button
+              styleClass="p-button-danger p-button-sm"
+            ></p-button>
 
+            <p-button
               type="button"
-              pButton
               icon="pi pi-check"
               (click)="agreeRemove()"
               label="Đồng ý"
-            ></button>
+              styleClass="p-button-sm"
+            ></p-button>
           </div>
         </p-dialog>
   `,
@@ -228,6 +228,19 @@ export class TodoItemComponent implements OnInit {
     this.todo_form.controls['fm_btn_submit'].setValue(
       !this.todo_form.value.fm_btn_submit
     );
+
+    //Xoá tất cả trường đăng nhập
+    this.resetForm();
+  }
+
+
+  resetForm() {
+    // Reset value input fiels.
+    this.todo_form.controls['fm_title'].setValue(null);
+    this.todo_form.controls['fm_description'].setValue(null);
+    this.todo_form.controls['fm_time_start'].setValue(null);
+    this.todo_form.controls['fm_time_deadline'].setValue(null);
+    this.todo_form.controls['fm_priority'].setValue(null);
   }
 
   completeItem(): void {

@@ -122,7 +122,7 @@ export class InputButtonUnitComponent implements OnInit {
     // var obj = this.form.value;
 
     //Nạp dữ liệu xuống local store
-    if (this.input_form.value.fm_title != null) {
+    if (this.input_form.valid) {
       // this.item.title = this.title;
       this.input_form.controls['fm_time_creation'].setValue(new Date());
       this.submit.emit(this.input_form.value);
@@ -176,6 +176,9 @@ export class InputButtonUnitComponent implements OnInit {
     this.input_form.controls['fm_btn_submit'].setValue(
       !this.input_form.value.fm_btn_submit
     );
+
+    //Xoá tất cả trường đăng nhập
+    this.resetForm();
   }
 
   resetAll() {
